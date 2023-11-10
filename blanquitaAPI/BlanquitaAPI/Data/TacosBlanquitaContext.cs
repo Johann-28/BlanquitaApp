@@ -32,16 +32,6 @@ public partial class TacosBlanquitaContext : DbContext
 
     public virtual DbSet<Usuario> Usuarios { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        var builder = new ConfigurationBuilder()
-            .AddUserSecrets<TacosBlanquitaContext>();
-
-        var configuration = builder.Build();
-
-        optionsBuilder.UseSqlServer(configuration["ConnectionStrings:TacosBlanquitaContext"]);
-    }
-
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Combo>(entity =>
