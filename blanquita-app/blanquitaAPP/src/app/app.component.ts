@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ProductoService } from './Http/producto.service';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'blanquitaAPP';
 
-  constructor() { }
+  constructor(
+    private productoService: ProductoService
+  ) { }
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+  }
+
+  public consultarTiposProductos(){
+      this.productoService.getApiData().subscribe((data) => console.log(data));
   }
 
   
