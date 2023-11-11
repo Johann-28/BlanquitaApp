@@ -32,7 +32,7 @@ namespace YourNamespace.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<TipoProducto>> ConsultarUnTipoProducto(int id)
         {
-            var tipoProducto = await _context.TipoProductos.FindAsync(id);
+            var tipoProducto = await _context.TipoProductos.Include(tP => tP.Productos).FirstOrDefaultAsync(tP => tP.IdTipoProducto == id);
 
             if (tipoProducto == null)
             {
@@ -76,11 +76,7 @@ namespace YourNamespace.Controllers
         [HttpPost]
         public async Task<ActionResult<TipoProducto>> Agregar()
         {
-
-            _context.TipoProductos.Add(new TipoProducto { Clave = "TAC", Descripcion = "Tacos" });
-            _context.TipoProductos.Add(new TipoProducto { Clave = "BEB", Descripcion = "Bebidas" });
-            _context.TipoProductos.Add(new TipoProducto { Clave = "COM", Descripcion = "Combos" });
-            _context.TipoProductos.Add(new TipoProducto { Clave = "POS", Descripcion = "Postres" });
+            _context.TipoProductos.Add(new TipoProducto { Clave = "EJE", Descripcion = "Ejemplo" });
             await _context.SaveChangesAsync();
 
             return Ok();
