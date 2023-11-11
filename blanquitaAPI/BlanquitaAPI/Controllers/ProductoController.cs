@@ -21,14 +21,14 @@ namespace BlanquitaAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
         {
-            return await _context.Productos.ToListAsync();
+            return await _context.Producto.ToListAsync();
         }
 
         // GET: api/Producto/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Producto>> GetProducto(int id)
         {
-            var producto = await _context.Productos.FindAsync(id);
+            var producto = await _context.Producto.FindAsync(id);
 
             if (producto == null)
             {
@@ -51,7 +51,7 @@ namespace BlanquitaAPI.Controllers
                 IdTipoProducto = 1
             };
 
-            _context.Productos.Add(producto);
+            _context.Producto.Add(producto);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetProducto), new { id = producto.IdProducto }, producto);
@@ -91,13 +91,13 @@ namespace BlanquitaAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProducto(int id)
         {
-            var producto = await _context.Productos.FindAsync(id);
+            var producto = await _context.Producto.FindAsync(id);
             if (producto == null)
             {
                 return NotFound();
             }
 
-            _context.Productos.Remove(producto);
+            _context.Producto.Remove(producto);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -105,7 +105,7 @@ namespace BlanquitaAPI.Controllers
 
         private bool ProductoExists(int id)
         {
-            return _context.Productos.Any(e => e.IdProducto == id);
+            return _context.Producto.Any(e => e.IdProducto == id);
         }
     }
 

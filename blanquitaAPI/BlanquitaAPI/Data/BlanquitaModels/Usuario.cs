@@ -17,5 +17,5 @@ public partial class Usuario
 
     public virtual Perfil IdPerfilNavigation { get; set; } = null!;
 
-    public virtual ICollection<Orden> Ordens { get; set; } = new List<Orden>();
+    public virtual ICollection<Orden> Orden { get; set; } = new List<Orden>();
 }

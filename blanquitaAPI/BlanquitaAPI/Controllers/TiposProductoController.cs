@@ -23,8 +23,8 @@ namespace YourNamespace.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TipoProducto>>> ConsultarTiposProductos()
         {
-            return await _context.TipoProductos
-            .Include(tP => tP.Productos)
+            return await _context.TipoProducto
+            .Include(tP => tP.Producto)
             .ToListAsync();
         }
 
@@ -32,7 +32,7 @@ namespace YourNamespace.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<TipoProducto>> ConsultarUnTipoProducto(int id)
         {
-            var tipoProducto = await _context.TipoProductos.Include(tP => tP.Productos).FirstOrDefaultAsync(tP => tP.IdTipoProducto == id);
+            var tipoProducto = await _context.TipoProducto.Include(tP => tP.Producto).FirstOrDefaultAsync(tP => tP.IdTipoProducto == id);
 
             if (tipoProducto == null)
             {
@@ -76,7 +76,7 @@ namespace YourNamespace.Controllers
         [HttpPost]
         public async Task<ActionResult<TipoProducto>> Agregar()
         {
-            _context.TipoProductos.Add(new TipoProducto { Clave = "EJE", Descripcion = "Ejemplo" });
+            _context.TipoProducto.Add(new TipoProducto { Clave = "EJE", Descripcion = "Ejemplo" });
             await _context.SaveChangesAsync();
 
             return Ok();
@@ -85,13 +85,13 @@ namespace YourNamespace.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteTipoProducto(int id)
         {
-            var tipoProducto = await _context.TipoProductos.FindAsync(id);
+            var tipoProducto = await _context.TipoProducto.FindAsync(id);
             if (tipoProducto == null)
             {
                 return NotFound();
             }
 
-            _context.TipoProductos.Remove(tipoProducto);
+            _context.TipoProducto.Remove(tipoProducto);
             await _context.SaveChangesAsync();
 
             return NoContent();
@@ -99,7 +99,7 @@ namespace YourNamespace.Controllers
 
         private bool TipoProductoExists(int id)
         {
-            return _context.TipoProductos.Any(e => e.IdTipoProducto == id);
+            return _context.TipoProducto.Any(e => e.IdTipoProducto == id);
         }
     }
 }

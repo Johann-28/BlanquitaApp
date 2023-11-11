@@ -15,5 +15,5 @@ public partial class Orden
 
     public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 
-    public virtual ICollection<OrdenCombo> OrdenCombos { get; set; } = new List<OrdenCombo>();
+    public virtual ICollection<OrdenCombo> OrdenCombo { get; set; } = new List<OrdenCombo>();
 }
