@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace BlanquitaAPI.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = "Administrador")]
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioController : ControllerBase
