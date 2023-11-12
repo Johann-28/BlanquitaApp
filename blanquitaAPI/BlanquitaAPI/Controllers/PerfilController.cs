@@ -1,10 +1,6 @@
-
-using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System.Linq;
 using BlanquitaAPI.Data.BlanquitaModels;
-using BlanquitaAPI.Data;
-using Microsoft.EntityFrameworkCore;
+using BlanquitaAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BlanquitaAPI.Controllers
 {
@@ -12,25 +8,25 @@ namespace BlanquitaAPI.Controllers
     [ApiController]
     public class PerfilController : ControllerBase
     {
+        private readonly PerfilService _perfilService;
 
-        private readonly TacosBlanquitaContext _context;
-        public PerfilController(TacosBlanquitaContext context)
+        public PerfilController(PerfilService perfilService)
         {
-            _context = context;
+            _perfilService = perfilService;
         }
 
         // GET: api/perfil
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Perfil>>> Get()
         {
-            return await _context.Perfil.ToListAsync();
+            return Ok(await _perfilService.GetPerfiles());
         }
 
         // GET: api/perfil/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Perfil>> Get(int id)
         {
-            var perfil = await _context.Perfil.FirstOrDefaultAsync(p => p.IdPerfil == id);
+            var perfil = await _perfilService.GetPerfil(id);
 
             if (perfil == null)
             {
@@ -42,37 +38,22 @@ namespace BlanquitaAPI.Controllers
 
         // POST: api/perfil
         [HttpPost]
-        public async Task<ActionResult<Perfil>> Post()
+        public async Task<ActionResult<Perfil>> Post([FromBody] Perfil perfil)
         {
-            Perfil perfil = new()
-            {
-                Clave = "ADM",
-                Nombre = "Administrador",
-            };
-
-            _context.Perfil.Add(perfil);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(Get), new { id = perfil.IdPerfil }, perfil);
+            var createdPerfil = await _perfilService.PostPerfil(perfil);
+            return CreatedAtAction(nameof(Get), new { id = createdPerfil.IdPerfil }, createdPerfil);
         }
-
 
         // PUT: api/perfil/5
         [HttpPut("{id}")]
         public async Task<IActionResult> Put(int id, [FromBody] Perfil perfil)
         {
-            var existingPerfil = await _context.Perfil.FirstOrDefaultAsync(p => p.IdPerfil == id);
+            var result = await _perfilService.PutPerfil(id, perfil);
 
-            if (existingPerfil == null)
+            if (!result)
             {
                 return NotFound();
             }
-
-            existingPerfil.Clave = perfil.Clave;
-            existingPerfil.Nombre = perfil.Nombre;
-
-            _context.Perfil.Update(existingPerfil);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }
@@ -81,15 +62,11 @@ namespace BlanquitaAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
         {
-            var perfil = await _context.Perfil.FirstOrDefaultAsync(p => p.IdPerfil == id);
-
+            var perfil = await _perfilService.DeletePerfil(id);
             if (perfil == null)
             {
                 return NotFound();
             }
-
-            _context.Perfil.Remove(perfil);
-            await _context.SaveChangesAsync();
 
             return NoContent();
         }

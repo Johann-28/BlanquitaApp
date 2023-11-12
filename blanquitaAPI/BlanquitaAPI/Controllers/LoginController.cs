@@ -1,8 +1,6 @@
 
 using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
-using System.Threading.Tasks;
 using BlanquitaAPI.Dtos;
 
 namespace BlanquitaAPI.Controllers

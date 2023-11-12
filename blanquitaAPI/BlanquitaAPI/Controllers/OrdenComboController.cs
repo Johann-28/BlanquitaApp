@@ -1,11 +1,7 @@
 
-using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace TacosBlanquitaAPI.Controllers
 {
@@ -13,25 +9,24 @@ namespace TacosBlanquitaAPI.Controllers
     [ApiController]
     public class OrdenComboController : ControllerBase
     {
-        private readonly TacosBlanquitaContext _context;
 
-        public OrdenComboController(TacosBlanquitaContext context)
+        private readonly OrdenComboService _ordenComboService;
+
+        public OrdenComboController(OrdenComboService ordenComboService)
         {
-            _context = context;
+            _ordenComboService = ordenComboService;
         }
-
         // GET: api/OrdenCombo
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OrdenCombo>>> GetOrdenCombos()
         {
-            return await _context.OrdenCombo.ToListAsync();
+            return Ok(await _ordenComboService.GetOrdenCombos());
         }
 
-        // GET: api/OrdenCombo/5
         [HttpGet("{id}")]
         public async Task<ActionResult<OrdenCombo>> GetOrdenCombo(int id)
         {
-            var ordenCombo = await _context.OrdenCombo.FindAsync(id);
+            var ordenCombo = await _ordenComboService.GetOrdenCombo(id);
 
             if (ordenCombo == null)
             {
@@ -41,7 +36,6 @@ namespace TacosBlanquitaAPI.Controllers
             return ordenCombo;
         }
 
-        // PUT: api/OrdenCombo/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutOrdenCombo(int id, OrdenCombo ordenCombo)
         {
@@ -50,56 +44,34 @@ namespace TacosBlanquitaAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(ordenCombo).State = EntityState.Modified;
+            var result = await _ordenComboService.PutOrdenCombo(id, ordenCombo);
 
-            try
+            if (!result)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrdenComboExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return NoContent();
         }
 
-        // POST: api/OrdenCombo
         [HttpPost]
         public async Task<ActionResult<OrdenCombo>> PostOrdenCombo(OrdenCombo ordenCombo)
         {
-            _context.OrdenCombo.Add(ordenCombo);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetOrdenCombo), new { id = ordenCombo.IdOrdenCombo }, ordenCombo);
+            var createdOrdenCombo = await _ordenComboService.PostOrdenCombo(ordenCombo);
+            return CreatedAtAction(nameof(GetOrdenCombo), new { id = createdOrdenCombo.IdOrdenCombo }, createdOrdenCombo);
         }
 
-        // DELETE: api/OrdenCombo/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrdenCombo(int id)
         {
-            var ordenCombo = await _context.OrdenCombo.FindAsync(id);
+            var ordenCombo = await _ordenComboService.DeleteOrdenCombo(id);
             if (ordenCombo == null)
             {
                 return NotFound();
             }
 
-            _context.OrdenCombo.Remove(ordenCombo);
-            await _context.SaveChangesAsync();
-
             return NoContent();
         }
 
-        private bool OrdenComboExists(int id)
-        {
-            return _context.OrdenCombo.Any(e => e.IdOrdenCombo == id);
-        }
     }
 }

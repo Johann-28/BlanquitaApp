@@ -1,8 +1,6 @@
-
-using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BlanquitaAPI.Controllers
 {
@@ -10,25 +8,25 @@ namespace BlanquitaAPI.Controllers
     [ApiController]
     public class ProductoController : ControllerBase
     {
-        private readonly TacosBlanquitaContext _context;
+        private readonly ProductoService _productoService;
 
-        public ProductoController(TacosBlanquitaContext context)
+        public ProductoController(ProductoService productoService)
         {
-            _context = context;
+            _productoService = productoService;
         }
 
         // GET: api/Producto
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Producto>>> GetProductos()
         {
-            return await _context.Producto.ToListAsync();
+            return Ok(await _productoService.GetProductos());
         }
 
         // GET: api/Producto/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Producto>> GetProducto(int id)
         {
-            var producto = await _context.Producto.FindAsync(id);
+            var producto = await _productoService.GetProducto(id);
 
             if (producto == null)
             {
@@ -40,48 +38,21 @@ namespace BlanquitaAPI.Controllers
 
         // POST: api/Producto
         [HttpPost]
-        public async Task<ActionResult<Producto>> PostProducto()
+        public async Task<ActionResult<Producto>> PostProducto([FromBody] Producto producto)
         {
-
-            //generate a mockup data
-            var producto = new Producto
-            {
-                Descripcion = "Taco de frijol",
-                Precio = 8,
-                IdTipoProducto = 1
-            };
-
-            _context.Producto.Add(producto);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetProducto), new { id = producto.IdProducto }, producto);
+            var createdProducto = await _productoService.PostProducto(producto);
+            return CreatedAtAction(nameof(GetProducto), new { id = createdProducto.IdProducto }, createdProducto);
         }
 
         // PUT: api/Producto/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProducto(int id, Producto producto)
         {
-            if (id != producto.IdProducto)
-            {
-                return BadRequest();
-            }
+            var result = await _productoService.PutProducto(id, producto);
 
-            _context.Entry(producto).State = EntityState.Modified;
-
-            try
+            if (!result)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ProductoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return NoContent();
@@ -91,25 +62,13 @@ namespace BlanquitaAPI.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteProducto(int id)
         {
-            var producto = await _context.Producto.FindAsync(id);
+            var producto = await _productoService.DeleteProducto(id);
             if (producto == null)
             {
                 return NotFound();
             }
 
-            _context.Producto.Remove(producto);
-            await _context.SaveChangesAsync();
-
             return NoContent();
         }
-
-        private bool ProductoExists(int id)
-        {
-            return _context.Producto.Any(e => e.IdProducto == id);
-        }
-    }
-
-    internal class BlanquitaAPIContext
-    {
     }
 }

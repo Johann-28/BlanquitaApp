@@ -1,6 +1,7 @@
 using System.Text;
 using System.Text.Json.Serialization;
 using BlanquitaAPI.Data;
+using BlanquitaAPI.Data.BlanquitaModels;
 using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -53,6 +54,12 @@ builder.Services.AddScoped<LoginService>();
 builder.Services.AddScoped<EncryptionService>();
 builder.Services.AddScoped<UsuarioService>();
 builder.Services.AddScoped<UsuarioValidatorService>();
+builder.Services.AddScoped<ComboService>();
+builder.Services.AddScoped<OrdenComboService>();
+builder.Services.AddScoped<OrdenService>();
+builder.Services.AddScoped<PerfilService>();
+builder.Services.AddScoped<ProductoService>();
+builder.Services.AddScoped<TipoProductoService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>

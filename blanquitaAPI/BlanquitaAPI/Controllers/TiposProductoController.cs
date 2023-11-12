@@ -1,105 +1,71 @@
-using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace YourNamespace.Controllers
+[Route("api/[controller]")]
+[ApiController]
+public class TipoProductoController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class TipoProductoController : ControllerBase
+    private readonly TipoProductoService _tipoProductoService;
+
+    public TipoProductoController(TipoProductoService tipoProductoService)
     {
-        private readonly TacosBlanquitaContext _context;
+        _tipoProductoService = tipoProductoService;
+    }
 
-        public TipoProductoController(TacosBlanquitaContext context)
+    // GET: api/TipoProducto
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<TipoProducto>>> ConsultarTiposProductos()
+    {
+        return Ok(await _tipoProductoService.ConsultarTiposProductos());
+    }
+
+    // GET: api/TipoProducto/5
+    [HttpGet("{id}")]
+    public async Task<ActionResult<TipoProducto>> ConsultarUnTipoProducto(int id)
+    {
+        var tipoProducto = await _tipoProductoService.ConsultarUnTipoProducto(id);
+
+        if (tipoProducto == null)
         {
-            _context = context;
+            return NotFound();
         }
 
-        // GET: api/TipoProducto
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<TipoProducto>>> ConsultarTiposProductos()
+        return tipoProducto;
+    }
+
+    // PUT: api/TipoProducto/5
+    [HttpPut("{id}")]
+    public async Task<IActionResult> ActualizarTipoProducto(int id, TipoProducto tipoProducto)
+    {
+        var result = await _tipoProductoService.ActualizarTipoProducto(id, tipoProducto);
+
+        if (!result)
         {
-            return await _context.TipoProducto
-            .Include(tP => tP.Producto)
-            .ToListAsync();
+            return NotFound();
         }
 
-        // GET: api/TipoProducto/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<TipoProducto>> ConsultarUnTipoProducto(int id)
+        return NoContent();
+    }
+
+    // POST: api/TipoProducto
+    [HttpPost]
+    public async Task<ActionResult<TipoProducto>> Agregar()
+    {
+        var createdTipoProducto = await _tipoProductoService.Agregar();
+        return CreatedAtAction(nameof(ConsultarUnTipoProducto), new { id = createdTipoProducto.IdTipoProducto }, createdTipoProducto);
+    }
+
+    // DELETE: api/TipoProducto/5
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteTipoProducto(int id)
+    {
+        var tipoProducto = await _tipoProductoService.DeleteTipoProducto(id);
+        if (tipoProducto == null)
         {
-            var tipoProducto = await _context.TipoProducto.Include(tP => tP.Producto).FirstOrDefaultAsync(tP => tP.IdTipoProducto == id);
-
-            if (tipoProducto == null)
-            {
-                return NotFound();
-            }
-
-            return tipoProducto;
+            return NotFound();
         }
 
-        // PUT: api/TipoProducto/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> ActualizarTipoProducto(int id, TipoProducto tipoProducto)
-        {
-            if (id != tipoProducto.IdTipoProducto)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(tipoProducto).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!TipoProductoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
-
-        [HttpPost]
-        public async Task<ActionResult<TipoProducto>> Agregar()
-        {
-            _context.TipoProducto.Add(new TipoProducto { Clave = "EJE", Descripcion = "Ejemplo" });
-            await _context.SaveChangesAsync();
-
-            return Ok();
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteTipoProducto(int id)
-        {
-            var tipoProducto = await _context.TipoProducto.FindAsync(id);
-            if (tipoProducto == null)
-            {
-                return NotFound();
-            }
-
-            _context.TipoProducto.Remove(tipoProducto);
-            await _context.SaveChangesAsync();
-
-            return NoContent();
-        }
-
-        private bool TipoProductoExists(int id)
-        {
-            return _context.TipoProducto.Any(e => e.IdTipoProducto == id);
-        }
+        return NoContent();
     }
 }

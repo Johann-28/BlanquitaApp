@@ -2,10 +2,6 @@
 using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace BlanquitaAPI.Controllers
 {
@@ -14,24 +10,26 @@ namespace BlanquitaAPI.Controllers
     public class ComboController : ControllerBase
     {
         private readonly TacosBlanquitaContext _context;
+        private readonly ComboService _comboService;
 
-        public ComboController(TacosBlanquitaContext context)
+        public ComboController(TacosBlanquitaContext context, ComboService comboService)
         {
             _context = context;
+            _comboService = comboService;
         }
 
         // GET: api/Combo
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Combo>>> GetCombos()
+        public async Task<IEnumerable<Combo>> GetCombos()
         {
-            return await _context.Combo.ToListAsync();
+            return await _comboService.GetCombos();
         }
 
         // GET: api/Combo/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Combo>> GetCombo(int id)
         {
-            var combo = await _context.Combo.FindAsync(id);
+            var combo = await _comboService.GetCombo(id);
 
             if (combo == null)
             {
@@ -50,56 +48,33 @@ namespace BlanquitaAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(combo).State = EntityState.Modified;
+            var result = await _comboService.PutCombo(id, combo);
 
-            try
+            if (!result)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ComboExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return NoContent();
         }
 
-        // POST: api/Combo
         [HttpPost]
         public async Task<ActionResult<Combo>> PostCombo(Combo combo)
         {
-            _context.Combo.Add(combo);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetCombo), new { id = combo.IdCombo }, combo);
+            var createdCombo = await _comboService.PostCombo(combo);
+            return CreatedAtAction(nameof(GetCombo), new { id = createdCombo.IdCombo }, createdCombo);
         }
 
-        // DELETE: api/Combo/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteCombo(int id)
         {
-            var combo = await _context.Combo.FindAsync(id);
+            var combo = await _comboService.DeleteCombo(id);
             if (combo == null)
             {
                 return NotFound();
             }
 
-            _context.Combo.Remove(combo);
-            await _context.SaveChangesAsync();
-
             return NoContent();
-        }
-
-        private bool ComboExists(int id)
-        {
-            return _context.Combo.Any(e => e.IdCombo == id);
         }
     }
 }

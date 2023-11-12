@@ -1,37 +1,32 @@
-
-using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace TacosBlanquitaAPI.Controllers
+namespace BlanquitaAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class OrdenController : ControllerBase
     {
-        private readonly TacosBlanquitaContext _context;
+        private readonly OrdenService _ordenService;
 
-        public OrdenController(TacosBlanquitaContext context)
+        public OrdenController(OrdenService ordenService)
         {
-            _context = context;
+            _ordenService = ordenService;
         }
 
         // GET: api/Orden
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Orden>>> GetOrden()
         {
-            return await _context.Orden.ToListAsync();
+            return Ok(await _ordenService.GetOrdenes());
         }
 
         // GET: api/Orden/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Orden>> GetOrden(int id)
         {
-            var orden = await _context.Orden.FindAsync(id);
+            var orden = await _ordenService.GetOrden(id);
 
             if (orden == null)
             {
@@ -50,22 +45,11 @@ namespace TacosBlanquitaAPI.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(orden).State = EntityState.Modified;
+            var result = await _ordenService.PutOrden(id, orden);
 
-            try
+            if (!result)
             {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!OrdenExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return NoContent();
@@ -75,31 +59,21 @@ namespace TacosBlanquitaAPI.Controllers
         [HttpPost]
         public async Task<ActionResult<Orden>> PostOrden(Orden orden)
         {
-            _context.Orden.Add(orden);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction(nameof(GetOrden), new { id = orden.IdOrden }, orden);
+            var createdOrden = await _ordenService.PostOrden(orden);
+            return CreatedAtAction(nameof(GetOrden), new { id = createdOrden.IdOrden }, createdOrden);
         }
 
         // DELETE: api/Orden/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteOrden(int id)
         {
-            var orden = await _context.Orden.FindAsync(id);
+            var orden = await _ordenService.DeleteOrden(id);
             if (orden == null)
             {
                 return NotFound();
             }
 
-            _context.Orden.Remove(orden);
-            await _context.SaveChangesAsync();
-
             return NoContent();
-        }
-
-        private bool OrdenExists(int id)
-        {
-            return _context.Orden.Any(e => e.IdOrden == id);
         }
     }
 }

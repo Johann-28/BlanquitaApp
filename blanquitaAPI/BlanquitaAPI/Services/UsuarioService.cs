@@ -2,7 +2,6 @@
 using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
 using BlanquitaAPI.Dtos;
-using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 public class UsuarioService
