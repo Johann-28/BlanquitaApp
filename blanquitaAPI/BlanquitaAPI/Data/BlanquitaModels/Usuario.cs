@@ -19,3 +19,4 @@ public partial class Usuario
 
     public virtual ICollection<Orden> Orden { get; set; } = new List<Orden>();
 }
+
