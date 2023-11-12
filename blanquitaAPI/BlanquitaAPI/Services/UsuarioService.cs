@@ -3,6 +3,7 @@ using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
 using BlanquitaAPI.Dtos;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.EntityFrameworkCore;
 
 public class UsuarioService
 {
@@ -22,6 +23,7 @@ public class UsuarioService
     public Usuario? Login(LoginRequest loginRequest)
     {
         Usuario? usuario = _context.Usuario
+                                    .Include(us => us.IdPerfilNavigation)
                                     .FirstOrDefault(u =>
                                     u.Correo == loginRequest.Correo &&
                                     u.Contrasena == loginRequest.Password);
