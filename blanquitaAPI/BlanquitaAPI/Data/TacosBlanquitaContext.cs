@@ -67,9 +67,7 @@ public partial class TacosBlanquitaContext : DbContext
 
             entity.Property(e => e.Descripcion).HasMaxLength(50);
 
-            entity.HasOne(d => d.IdComboNavigation).WithMany(p => p.Producto)
-                .HasForeignKey(d => d.IdCombo)
-                .HasConstraintName("FK_Producto_Combo");
+
 
             entity.HasOne(d => d.IdTipoProductoNavigation).WithMany(p => p.Producto)
                 .HasForeignKey(d => d.IdTipoProducto)
