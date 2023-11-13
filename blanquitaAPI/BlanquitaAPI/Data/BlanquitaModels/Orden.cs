@@ -13,7 +13,7 @@ public partial class Orden
 
     public DateTime Fecha { get; set; }
 
-    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
+    public virtual ICollection<Combo> Combo { get; set; } = new List<Combo>();
 
-    public virtual ICollection<OrdenCombo> OrdenCombo { get; set; } = new List<OrdenCombo>();
+    public virtual Usuario IdUsuarioNavigation { get; set; } = null!;
 }

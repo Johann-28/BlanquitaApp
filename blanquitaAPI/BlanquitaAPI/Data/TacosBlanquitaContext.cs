@@ -16,8 +16,6 @@ public partial class TacosBlanquitaContext : DbContext
 
     public virtual DbSet<Orden> Orden { get; set; }
 
-    public virtual DbSet<OrdenCombo> OrdenCombo { get; set; }
-
     public virtual DbSet<Perfil> Perfil { get; set; }
 
     public virtual DbSet<Producto> Producto { get; set; }
@@ -33,6 +31,10 @@ public partial class TacosBlanquitaContext : DbContext
             entity.HasKey(e => e.IdCombo).HasName("PK__Combo__D65BF2C8230EB487");
 
             entity.Property(e => e.Descripcion).HasMaxLength(50);
+
+            entity.HasOne(d => d.IdOrdenNavigation).WithMany(p => p.Combo)
+                .HasForeignKey(d => d.IdOrden)
+                .HasConstraintName("FK_Orden_Combo");
         });
 
         modelBuilder.Entity<Orden>(entity =>
@@ -45,21 +47,6 @@ public partial class TacosBlanquitaContext : DbContext
                 .HasForeignKey(d => d.IdUsuario)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Orden__IdUsuario__46E78A0C");
-        });
-
-        modelBuilder.Entity<OrdenCombo>(entity =>
-        {
-            entity.HasKey(e => e.IdOrdenCombo).HasName("PK__OrdenCom__6BEFCB8B41CA470A");
-
-            entity.HasOne(d => d.IdComboNavigation).WithMany(p => p.OrdenCombo)
-                .HasForeignKey(d => d.IdCombo)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__OrdenComb__IdCom__4AB81AF0");
-
-            entity.HasOne(d => d.IdOrdenNavigation).WithMany(p => p.OrdenCombo)
-                .HasForeignKey(d => d.IdOrden)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__OrdenComb__IdOrd__49C3F6B7");
         });
 
         modelBuilder.Entity<Perfil>(entity =>

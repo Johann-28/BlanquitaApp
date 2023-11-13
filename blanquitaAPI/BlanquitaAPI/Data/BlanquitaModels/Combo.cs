@@ -11,7 +11,9 @@ public partial class Combo
 
     public double? Total { get; set; }
 
-    public virtual ICollection<OrdenCombo> OrdenCombo { get; set; } = new List<OrdenCombo>();
+    public int? IdOrden { get; set; }
+
+    public virtual Orden? IdOrdenNavigation { get; set; }
 
     public virtual ICollection<Producto> Producto { get; set; } = new List<Producto>();
 }
