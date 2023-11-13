@@ -13,7 +13,9 @@ public partial class Producto
 
     public double Precio { get; set; }
 
-    public virtual TipoProducto IdTipoProductoNavigation { get; set; } = null!;
+    public int? IdCombo { get; set; }
 
-    public virtual ICollection<ProductoCombo> ProductoCombo { get; set; } = new List<ProductoCombo>();
+    public virtual Combo? IdComboNavigation { get; set; }
+
+    public virtual TipoProducto IdTipoProductoNavigation { get; set; } = null!;
 }

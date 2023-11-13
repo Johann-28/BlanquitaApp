@@ -13,5 +13,5 @@ public partial class Combo
 
     public virtual ICollection<OrdenCombo> OrdenCombo { get; set; } = new List<OrdenCombo>();
 
-    public virtual ICollection<ProductoCombo> ProductoCombo { get; set; } = new List<ProductoCombo>();
+    public virtual ICollection<Producto> Producto { get; set; } = new List<Producto>();
 }

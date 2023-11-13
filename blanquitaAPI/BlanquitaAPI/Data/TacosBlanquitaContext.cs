@@ -22,8 +22,6 @@ public partial class TacosBlanquitaContext : DbContext
 
     public virtual DbSet<Producto> Producto { get; set; }
 
-    public virtual DbSet<ProductoCombo> ProductoCombo { get; set; }
-
     public virtual DbSet<TipoProducto> TipoProducto { get; set; }
 
     public virtual DbSet<Usuario> Usuario { get; set; }
@@ -82,24 +80,13 @@ public partial class TacosBlanquitaContext : DbContext
 
             entity.Property(e => e.Descripcion).HasMaxLength(50);
 
+            entity.HasOne(d => d.IdComboNavigation).WithMany(p => p.Producto)
+                .HasForeignKey(d => d.IdCombo)
+                .HasConstraintName("FK_Producto_Combo");
+
             entity.HasOne(d => d.IdTipoProductoNavigation).WithMany(p => p.Producto)
                 .HasForeignKey(d => d.IdTipoProducto)
                 .HasConstraintName("FK__Producto__IdTipo__398D8EEE");
-        });
-
-        modelBuilder.Entity<ProductoCombo>(entity =>
-        {
-            entity.HasKey(e => e.IdProductoCombo).HasName("PK__Producto__87A1E832A9D2970E");
-
-            entity.HasOne(d => d.IdComboNavigation).WithMany(p => p.ProductoCombo)
-                .HasForeignKey(d => d.IdCombo)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ProductoC__IdCom__3E52440B");
-
-            entity.HasOne(d => d.IdProductoNavigation).WithMany(p => p.ProductoCombo)
-                .HasForeignKey(d => d.IdProducto)
-                .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ProductoC__IdPro__3F466844");
         });
 
         modelBuilder.Entity<TipoProducto>(entity =>
