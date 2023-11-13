@@ -1,4 +1,5 @@
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -36,7 +37,7 @@ public class TipoProductoController : ControllerBase
 
     // PUT: api/TipoProducto/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> ActualizarTipoProducto(int id, TipoProducto tipoProducto)
+    public async Task<IActionResult> ActualizarTipoProducto(int id, TipoProductoDto tipoProducto)
     {
         var result = await _tipoProductoService.ActualizarTipoProducto(id, tipoProducto);
 
@@ -50,9 +51,9 @@ public class TipoProductoController : ControllerBase
 
     // POST: api/TipoProducto
     [HttpPost]
-    public async Task<ActionResult<TipoProducto>> Agregar()
+    public async Task<ActionResult<TipoProducto>> Agregar(TipoProductoDto tipoProducto)
     {
-        var createdTipoProducto = await _tipoProductoService.Agregar();
+        var createdTipoProducto = await _tipoProductoService.Agregar(tipoProducto);
         return CreatedAtAction(nameof(ConsultarUnTipoProducto), new { id = createdTipoProducto.IdTipoProducto }, createdTipoProducto);
     }
 

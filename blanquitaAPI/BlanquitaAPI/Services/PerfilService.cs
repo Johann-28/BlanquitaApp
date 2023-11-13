@@ -1,5 +1,6 @@
 using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlanquitaAPI.Services
@@ -23,17 +24,21 @@ namespace BlanquitaAPI.Services
             return await _context.Perfil.FirstOrDefaultAsync(p => p.IdPerfil == id);
         }
 
-        public async Task<Perfil> PostPerfil(Perfil perfil)
+        public async Task<Perfil> PostPerfil(PerfilDto perfil)
         {
-            _context.Perfil.Add(perfil);
+            var perfilToCreate = new Perfil
+            {
+                Clave = perfil.Clave,
+                Nombre = perfil.Nombre
+            };
+            _context.Perfil.Add(perfilToCreate);
             await _context.SaveChangesAsync();
-            return perfil;
+            return perfilToCreate;
         }
 
-        public async Task<bool> PutPerfil(int id, Perfil perfil)
+        public async Task<bool> PutPerfil(int id, PerfilDto perfil)
         {
             var existingPerfil = await _context.Perfil.FirstOrDefaultAsync(p => p.IdPerfil == id);
-
             if (existingPerfil == null)
             {
                 return false;

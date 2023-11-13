@@ -1,8 +1,10 @@
 
 using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using Microsoft.EntityFrameworkCore;
 
+namespace BlanquitaAPI.Services;
 public class ComboService
 {
     private readonly TacosBlanquitaContext _context;
@@ -22,14 +24,22 @@ public class ComboService
         return await _context.Combo.FindAsync(id);
     }
 
-    public async Task<bool> PutCombo(int id, Combo combo)
+    public async Task<bool> PutCombo(int id, ComboDto combo)
     {
         if (id != combo.IdCombo)
         {
             return false;
         }
 
-        _context.Entry(combo).State = EntityState.Modified;
+
+        Combo comboToEdit = new()
+        {
+            Descripcion = combo.Descripcion,
+            Total = combo.Total,
+            IdCombo = combo.IdCombo,
+        };
+
+        _context.Entry(comboToEdit).State = EntityState.Modified;
 
         try
         {
@@ -57,11 +67,17 @@ public class ComboService
         return _context.Combo.Any(e => e.IdCombo == id);
     }
 
-    public async Task<Combo> PostCombo(Combo combo)
+    public async Task<Combo> PostCombo(ComboDto combo)
     {
-        _context.Combo.Add(combo);
+        var comboToCreate = new Combo
+        {
+            Descripcion = combo.Descripcion,
+            Total = combo.Total,
+            IdCombo = combo.IdCombo
+        };
+        _context.Combo.Add(comboToCreate);
         await _context.SaveChangesAsync();
-        return combo;
+        return comboToCreate;
     }
 
     public async Task<Combo?> DeleteCombo(int id)

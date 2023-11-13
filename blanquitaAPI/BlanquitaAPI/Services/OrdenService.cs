@@ -1,5 +1,6 @@
 using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlanquitaAPI.Services
@@ -23,14 +24,22 @@ namespace BlanquitaAPI.Services
             return await _context.Orden.FindAsync(id);
         }
 
-        public async Task<bool> PutOrden(int id, Orden orden)
+        public async Task<bool> PutOrden(int id, OrdenDto orden)
         {
             if (id != orden.IdOrden)
             {
                 return false;
             }
 
-            _context.Entry(orden).State = EntityState.Modified;
+            Orden ordenToEdit = new()
+            {
+                IdOrden = orden.IdOrden,
+                IdUsuario = orden.IdUsuario,
+                Total = orden.Total,
+                Fecha = orden.Fecha
+            };
+
+            _context.Entry(ordenToEdit).State = EntityState.Modified;
 
             try
             {
@@ -51,11 +60,18 @@ namespace BlanquitaAPI.Services
             return true;
         }
 
-        public async Task<Orden> PostOrden(Orden orden)
+        public async Task<Orden> PostOrden(OrdenDto orden)
         {
-            _context.Orden.Add(orden);
+            Orden ordenToCreate = new()
+            {
+                IdOrden = orden.IdOrden,
+                IdUsuario = orden.IdUsuario,
+                Total = orden.Total,
+                Fecha = orden.Fecha
+            };
+            _context.Orden.Add(ordenToCreate);
             await _context.SaveChangesAsync();
-            return orden;
+            return ordenToCreate;
         }
 
         public async Task<Orden?> DeleteOrden(int id)

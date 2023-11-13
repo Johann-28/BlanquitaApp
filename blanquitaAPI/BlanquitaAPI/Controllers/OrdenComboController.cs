@@ -1,5 +1,6 @@
 
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,7 +38,7 @@ namespace TacosBlanquitaAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrdenCombo(int id, OrdenCombo ordenCombo)
+        public async Task<IActionResult> PutOrdenCombo(int id, OrdenComboDto ordenCombo)
         {
             if (id != ordenCombo.IdOrdenCombo)
             {
@@ -55,7 +56,7 @@ namespace TacosBlanquitaAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<OrdenCombo>> PostOrdenCombo(OrdenCombo ordenCombo)
+        public async Task<ActionResult<OrdenCombo>> PostOrdenCombo(OrdenComboDto ordenCombo)
         {
             var createdOrdenCombo = await _ordenComboService.PostOrdenCombo(ordenCombo);
             return CreatedAtAction(nameof(GetOrdenCombo), new { id = createdOrdenCombo.IdOrdenCombo }, createdOrdenCombo);

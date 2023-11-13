@@ -1,5 +1,6 @@
 using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlanquitaAPI.Services
@@ -23,21 +24,37 @@ namespace BlanquitaAPI.Services
             return await _context.Producto.FindAsync(id);
         }
 
-        public async Task<Producto> PostProducto(Producto producto)
+        public async Task<Producto> PostProducto(ProductoDto producto)
         {
-            _context.Producto.Add(producto);
+            var productoToCreate = new Producto
+            {
+                Descripcion = producto.Descripcion,
+                IdProducto = producto.IdProducto,
+                Precio = producto.Precio,
+                IdTipoProducto = producto.IdTipoProducto
+            };
+
+            _context.Producto.Add(productoToCreate);
             await _context.SaveChangesAsync();
-            return producto;
+            return productoToCreate;
         }
 
-        public async Task<bool> PutProducto(int id, Producto producto)
+        public async Task<bool> PutProducto(int id, ProductoDto producto)
         {
             if (id != producto.IdProducto)
             {
                 return false;
             }
 
-            _context.Entry(producto).State = EntityState.Modified;
+            var productoToEdit = new Producto
+            {
+                Descripcion = producto.Descripcion,
+                IdProducto = producto.IdProducto,
+                Precio = producto.Precio,
+                IdTipoProducto = producto.IdTipoProducto
+            };
+
+            _context.Entry(productoToEdit).State = EntityState.Modified;
 
             try
             {

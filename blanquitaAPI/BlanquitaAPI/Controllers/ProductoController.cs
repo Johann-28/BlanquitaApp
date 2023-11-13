@@ -1,4 +1,5 @@
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,7 +39,7 @@ namespace BlanquitaAPI.Controllers
 
         // POST: api/Producto
         [HttpPost]
-        public async Task<ActionResult<Producto>> PostProducto([FromBody] Producto producto)
+        public async Task<ActionResult<Producto>> PostProducto([FromBody] ProductoDto producto)
         {
             var createdProducto = await _productoService.PostProducto(producto);
             return CreatedAtAction(nameof(GetProducto), new { id = createdProducto.IdProducto }, createdProducto);
@@ -46,7 +47,7 @@ namespace BlanquitaAPI.Controllers
 
         // PUT: api/Producto/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProducto(int id, Producto producto)
+        public async Task<IActionResult> PutProducto(int id, ProductoDto producto)
         {
             var result = await _productoService.PutProducto(id, producto);
 

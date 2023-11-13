@@ -1,5 +1,6 @@
 using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlanquitaAPI.Services
@@ -23,14 +24,21 @@ namespace BlanquitaAPI.Services
             return await _context.TipoProducto.Include(tP => tP.Producto).FirstOrDefaultAsync(tP => tP.IdTipoProducto == id);
         }
 
-        public async Task<bool> ActualizarTipoProducto(int id, TipoProducto tipoProducto)
+        public async Task<bool> ActualizarTipoProducto(int id, TipoProductoDto tipoProducto)
         {
             if (id != tipoProducto.IdTipoProducto)
             {
                 return false;
             }
 
-            _context.Entry(tipoProducto).State = EntityState.Modified;
+            var tipoProductoToEdit = new TipoProducto
+            {
+                IdTipoProducto = tipoProducto.IdTipoProducto,
+                Clave = tipoProducto.Clave,
+                Descripcion = tipoProducto.Descripcion
+            };
+
+            _context.Entry(tipoProductoToEdit).State = EntityState.Modified;
 
             try
             {
@@ -51,12 +59,16 @@ namespace BlanquitaAPI.Services
             return true;
         }
 
-        public async Task<TipoProducto> Agregar()
+        public async Task<TipoProducto> Agregar(TipoProductoDto tipoProducto)
         {
-            var tipoProducto = new TipoProducto { Clave = "EJE", Descripcion = "Ejemplo" };
-            _context.TipoProducto.Add(tipoProducto);
+            var tipoProductoToCreate = new TipoProducto
+            {
+                Clave = tipoProducto.Clave,
+                Descripcion = tipoProducto.Descripcion
+            };
+            _context.TipoProducto.Add(tipoProductoToCreate);
             await _context.SaveChangesAsync();
-            return tipoProducto;
+            return tipoProductoToCreate;
         }
 
         public async Task<TipoProducto?> DeleteTipoProducto(int id)

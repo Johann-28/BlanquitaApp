@@ -1,6 +1,8 @@
 
 using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
+using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlanquitaAPI.Controllers
@@ -41,7 +43,7 @@ namespace BlanquitaAPI.Controllers
 
         // PUT: api/Combo/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutCombo(int id, Combo combo)
+        public async Task<IActionResult> PutCombo(int id, ComboDto combo)
         {
             if (id != combo.IdCombo)
             {
@@ -59,7 +61,7 @@ namespace BlanquitaAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Combo>> PostCombo(Combo combo)
+        public async Task<ActionResult<Combo>> PostCombo(ComboDto combo)
         {
             var createdCombo = await _comboService.PostCombo(combo);
             return CreatedAtAction(nameof(GetCombo), new { id = createdCombo.IdCombo }, createdCombo);

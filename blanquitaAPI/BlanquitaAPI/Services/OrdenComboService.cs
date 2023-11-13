@@ -1,5 +1,6 @@
 using BlanquitaAPI.Data;
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlanquitaAPI.Services
@@ -23,14 +24,21 @@ namespace BlanquitaAPI.Services
             return await _context.OrdenCombo.FindAsync(id);
         }
 
-        public async Task<bool> PutOrdenCombo(int id, OrdenCombo ordenCombo)
+        public async Task<bool> PutOrdenCombo(int id, OrdenComboDto ordenCombo)
         {
             if (id != ordenCombo.IdOrdenCombo)
             {
                 return false;
             }
 
-            _context.Entry(ordenCombo).State = EntityState.Modified;
+            OrdenCombo ordenComboToEdit = new()
+            {
+                IdOrdenCombo = ordenCombo.IdOrdenCombo,
+                IdCombo = ordenCombo.IdCombo,
+                IdOrden = ordenCombo.IdOrden
+            };
+
+            _context.Entry(ordenComboToEdit).State = EntityState.Modified;
 
             try
             {
@@ -51,11 +59,17 @@ namespace BlanquitaAPI.Services
             return true;
         }
 
-        public async Task<OrdenCombo> PostOrdenCombo(OrdenCombo ordenCombo)
+        public async Task<OrdenCombo> PostOrdenCombo(OrdenComboDto ordenCombo)
         {
-            _context.OrdenCombo.Add(ordenCombo);
+            OrdenCombo ordenComboToCreate = new()
+            {
+                IdOrdenCombo = ordenCombo.IdOrdenCombo,
+                IdCombo = ordenCombo.IdCombo,
+                IdOrden = ordenCombo.IdOrden
+            };
+            _context.OrdenCombo.Add(ordenComboToCreate);
             await _context.SaveChangesAsync();
-            return ordenCombo;
+            return ordenComboToCreate;
         }
 
         public async Task<OrdenCombo?> DeleteOrdenCombo(int id)

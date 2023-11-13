@@ -21,11 +21,11 @@ namespace BlanquitaAPI.Controllers
         }
 
         [HttpPost("authenticate")]
-        public IActionResult Authenticate(LoginRequest model)
+        public IActionResult Authenticate(LoginRequest loginRequest)
         {
             try
             {
-                var loginResult = _loginService.Authenticate(model);
+                var loginResult = _loginService.Authenticate(loginRequest);
                 return Ok(loginResult);
 
             }

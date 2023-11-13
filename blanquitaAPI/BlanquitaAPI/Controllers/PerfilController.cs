@@ -1,4 +1,5 @@
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,7 +39,7 @@ namespace BlanquitaAPI.Controllers
 
         // POST: api/perfil
         [HttpPost]
-        public async Task<ActionResult<Perfil>> Post([FromBody] Perfil perfil)
+        public async Task<ActionResult<Perfil>> Post([FromBody] PerfilDto perfil)
         {
             var createdPerfil = await _perfilService.PostPerfil(perfil);
             return CreatedAtAction(nameof(Get), new { id = createdPerfil.IdPerfil }, createdPerfil);
@@ -46,7 +47,7 @@ namespace BlanquitaAPI.Controllers
 
         // PUT: api/perfil/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> Put(int id, [FromBody] Perfil perfil)
+        public async Task<IActionResult> Put(int id, [FromBody] PerfilDto perfil)
         {
             var result = await _perfilService.PutPerfil(id, perfil);
 

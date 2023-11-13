@@ -1,4 +1,5 @@
 using BlanquitaAPI.Data.BlanquitaModels;
+using BlanquitaAPI.Dtos;
 using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -38,7 +39,7 @@ namespace BlanquitaAPI.Controllers
 
         // PUT: api/Orden/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutOrden(int id, Orden orden)
+        public async Task<IActionResult> PutOrden(int id, OrdenDto orden)
         {
             if (id != orden.IdOrden)
             {
@@ -57,7 +58,7 @@ namespace BlanquitaAPI.Controllers
 
         // POST: api/Orden
         [HttpPost]
-        public async Task<ActionResult<Orden>> PostOrden(Orden orden)
+        public async Task<ActionResult<Orden>> PostOrden(OrdenDto orden)
         {
             var createdOrden = await _ordenService.PostOrden(orden);
             return CreatedAtAction(nameof(GetOrden), new { id = createdOrden.IdOrden }, createdOrden);
