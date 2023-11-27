@@ -7,9 +7,11 @@ import { Observable } from 'rxjs';
 })
 export class TipoProductoService {
 
+  private dataUrl = 'TipoProducto/';
+
   constructor(private http: HttpClient) { }
 
   public getApiData() : Observable<any[]> {
-    return this.http.get<any[]>('http://localhost:5139/api/TipoProducto');
+    return this.http.get<any[]>(this.dataUrl);
   }
 }
