@@ -2,11 +2,12 @@
 using BlanquitaAPI.Services;
 using Microsoft.AspNetCore.Mvc;
 using BlanquitaAPI.Dtos;
+using Microsoft.VisualBasic;
 
 namespace BlanquitaAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class LoginController : ControllerBase
     {
         private readonly IConfiguration _config;
@@ -36,7 +37,14 @@ namespace BlanquitaAPI.Controllers
 
         }
 
+        [HttpGet("register")]
+        public IActionResult Register()
+        {
+            var contrasenaMaria = "237007133105057224156062119094204213144203139120";
+            var contrasenaMariaDesencriptada = _helpersService.DecryptString(contrasenaMaria);
+            return Ok(contrasenaMariaDesencriptada);
+
+         }
+
     }
-
-
 }

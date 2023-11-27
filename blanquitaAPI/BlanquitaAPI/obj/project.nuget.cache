@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "l4UODAFFneinToI98gQNhrSBcZf56ZBmxqqb/hS8F97nOIpA0RXHJl3H5JMWMJhdF7rgM/GrTy2ago6TVYrOEQ==",
+  "dgSpecHash": "KHk8zkOmRX1xBQwDn3lkg+BgCTiEUVCxxi8sb6RQQRJI7hTCqEoreJ0jH7JdQn9xXTRBnlZCELQsQOEQD0Lnsg==",
   "success": true,
   "projectFilePath": "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\johan\\.nuget\\packages\\azure.core\\1.25.0\\azure.core.1.25.0.nupkg.sha512",
     "C:\\Users\\johan\\.nuget\\packages\\azure.identity\\1.7.0\\azure.identity.1.7.0.nupkg.sha512",
     "C:\\Users\\johan\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
+    "C:\\Users\\johan\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.13\\microsoft.aspnetcore.authentication.jwtbearer.7.0.13.nupkg.sha512",
     "C:\\Users\\johan\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.12\\microsoft.aspnetcore.openapi.7.0.12.nupkg.sha512",
     "C:\\Users\\johan\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\johan\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",

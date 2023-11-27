@@ -1,0 +1,7 @@
+{
+  "name": "blanquitaApp",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
