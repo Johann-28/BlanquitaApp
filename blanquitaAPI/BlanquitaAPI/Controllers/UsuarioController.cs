@@ -87,15 +87,15 @@ namespace BlanquitaAPI.Controllers
 
         // POST: api/Usuario
         [HttpPost]
-        public async Task<ActionResult<Usuario>> PostUsuario()
+        public async Task<ActionResult<Usuario>> PostUsuario(UsuarioDTO user)
         {
 
             var usuario = new Usuario
             {
-                Nombre = "Juan",
-                Contrasena = "123456",
-                IdPerfil = 1,
-                Correo = "johann"
+                Nombre = user.Nombre,
+                Contrasena = user.Contrasena,
+                IdPerfil = user.IdPerfil,
+                Correo = user.Correo
 
             };
             usuario.Contrasena = _helpersService.EncryptToString(usuario.Contrasena);
