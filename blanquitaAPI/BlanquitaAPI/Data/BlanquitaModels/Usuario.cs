@@ -15,8 +15,9 @@ public partial class Usuario
 
     public int IdPerfil { get; set; }
 
+    public virtual ICollection<CorteCaja> CorteCaja { get; set; } = new List<CorteCaja>();
+
     public virtual Perfil IdPerfilNavigation { get; set; } = null!;
 
     public virtual ICollection<Orden> Orden { get; set; } = new List<Orden>();
 }
-

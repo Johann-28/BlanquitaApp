@@ -14,6 +14,8 @@ public partial class TacosBlanquitaContext : DbContext
 
     public virtual DbSet<Combo> Combo { get; set; }
 
+    public virtual DbSet<CorteCaja> CorteCaja { get; set; }
+
     public virtual DbSet<Orden> Orden { get; set; }
 
     public virtual DbSet<OrdenCombo> OrdenCombo { get; set; }
@@ -37,9 +39,26 @@ public partial class TacosBlanquitaContext : DbContext
             entity.Property(e => e.Descripcion).HasMaxLength(50);
         });
 
+        modelBuilder.Entity<CorteCaja>(entity =>
+        {
+            entity.HasKey(e => e.IdCorteCaja).HasName("PK__CorteCaj__EF72B339B08C7EE6");
+
+            entity.Property(e => e.Comentarios)
+                .HasMaxLength(200)
+                .IsUnicode(false);
+            entity.Property(e => e.Fecha).HasColumnType("date");
+
+            entity.HasOne(d => d.IdUsuarioNavigation).WithMany(p => p.CorteCaja)
+                .HasForeignKey(d => d.IdUsuario)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__CorteCaja__Comen__02FC7413");
+        });
+
         modelBuilder.Entity<Orden>(entity =>
         {
             entity.HasKey(e => e.IdOrden).HasName("PK__Orden__C38F300D645A4506");
+
+            entity.HasIndex(e => e.IdUsuario, "IX_Orden_IdUsuario");
 
             entity.Property(e => e.Fecha).HasColumnType("datetime");
 
@@ -52,6 +71,10 @@ public partial class TacosBlanquitaContext : DbContext
         modelBuilder.Entity<OrdenCombo>(entity =>
         {
             entity.HasKey(e => e.IdOrdenCombo).HasName("PK__OrdenCom__6BEFCB8B41CA470A");
+
+            entity.HasIndex(e => e.IdCombo, "IX_OrdenCombo_IdCombo");
+
+            entity.HasIndex(e => e.IdOrden, "IX_OrdenCombo_IdOrden");
 
             entity.HasOne(d => d.IdComboNavigation).WithMany(p => p.OrdenCombo)
                 .HasForeignKey(d => d.IdCombo)
@@ -80,6 +103,8 @@ public partial class TacosBlanquitaContext : DbContext
         {
             entity.HasKey(e => e.IdProducto).HasName("PK__Producto__098892104075B11C");
 
+            entity.HasIndex(e => e.IdTipoProducto, "IX_Producto_IdTipoProducto");
+
             entity.Property(e => e.Descripcion).HasMaxLength(50);
 
             entity.HasOne(d => d.IdTipoProductoNavigation).WithMany(p => p.Producto)
@@ -90,6 +115,10 @@ public partial class TacosBlanquitaContext : DbContext
         modelBuilder.Entity<ProductoCombo>(entity =>
         {
             entity.HasKey(e => e.IdProductoCombo).HasName("PK__Producto__87A1E832A9D2970E");
+
+            entity.HasIndex(e => e.IdCombo, "IX_ProductoCombo_IdCombo");
+
+            entity.HasIndex(e => e.IdProducto, "IX_ProductoCombo_IdProducto");
 
             entity.HasOne(d => d.IdComboNavigation).WithMany(p => p.ProductoCombo)
                 .HasForeignKey(d => d.IdCombo)
@@ -113,6 +142,8 @@ public partial class TacosBlanquitaContext : DbContext
         modelBuilder.Entity<Usuario>(entity =>
         {
             entity.HasKey(e => e.IdUsuario).HasName("PK__Usuario__5B65BF97F5C1BA4D");
+
+            entity.HasIndex(e => e.IdPerfil, "IX_Usuario_IdPerfil");
 
             entity.Property(e => e.Contrasena)
                 .HasMaxLength(500)

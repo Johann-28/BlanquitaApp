@@ -1,3 +1,3 @@
 @echo off
-dotnet ef dbcontext scaffold "Server=localhost;Database=Tacos_Blanquita;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer --context-dir .\Data --output-dir .\Data\BlanquitaModels --force --no-onconfiguring --no-pluralize
+dotnet ef dbcontext scaffold "Server=tcp:tacos-blanquita.database.windows.net,1433;Initial Catalog=tacos-blanquita;Persist Security Info=False;User ID=tacosblanquita;Password=_7vyF5p!*86P;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" Microsoft.EntityFrameworkCore.SqlServer --context-dir .\Data --output-dir .\Data\BlanquitaModels --force --no-onconfiguring --no-pluralize
 pause
