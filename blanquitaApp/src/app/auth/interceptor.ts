@@ -7,7 +7,7 @@ export class BaseUrlInterceptor implements HttpInterceptor {
   
 
   intercept(req: HttpRequest<any>, next: HttpHandler) {
-    const apiReq = req.clone({ url: `${environment.urlBackend}${req.url}` });
+    const apiReq = req.clone({ url: `https://tacosblanquitaapi.azurewebsites.net/api/${req.url}` });
     return next.handle(apiReq);
   }
 }
