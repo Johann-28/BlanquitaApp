@@ -25,6 +25,10 @@ const routes: Routes = [
         loadChildren: () => import('../corte-caja/corte-caja.module').then(m => m.CorteCajaPageModule)
       },
       {
+        path: 'orden',
+        loadChildren: () => import('../orden/orden.module').then(m => m.OrdenPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab1',
         pathMatch: 'full'

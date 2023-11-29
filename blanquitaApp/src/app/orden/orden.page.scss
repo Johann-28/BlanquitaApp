@@ -1,0 +1,33 @@
+ion-content{
+    --background: #7D9B77;
+}
+
+.bg-negro{
+    background-color: #272727;
+    color: whitesmoke;
+    height: 35vh;
+}
+
+ion-item{
+    --background: #272727;
+    --border-color: whitesmoke;
+    color: whitesmoke;
+}
+
+ion-list{
+    --background: #272727;
+    background-color: #272727;
+    height: 80%;
+    overflow-y: auto;
+}
+
+.bg-negro-2{
+    background-color: #272727;
+    color: whitesmoke;
+    height: 50vh;
+}
+
+ion-button.enviar{
+    --background: #35B544;
+    --color: whitesmoke;
+}
