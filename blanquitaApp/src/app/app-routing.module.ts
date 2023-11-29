@@ -8,6 +8,10 @@ const routes: Routes = [
   },  {
     path: 'corte-caja',
     loadChildren: () => import('./corte-caja/corte-caja.module').then( m => m.CorteCajaPageModule)
+  },
+  {
+    path: 'orden',
+    loadChildren: () => import('./orden/orden.module').then( m => m.OrdenPageModule)
   }
 
 ];
