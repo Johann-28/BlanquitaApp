@@ -1,0 +1,80 @@
+ion-title {
+  font-family: 'Poppins';
+  font-weight: bold;
+}
+
+.background-container {
+  background-color: #282828;
+}
+
+ion-card-content-clave {
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  width: 80%;
+
+  ion-item {
+    border-radius: 10px;
+
+    ion-label {
+      color: #4b4b4b;
+    }
+
+    ion-input {
+      border-color: #4b4b4b;
+    }
+  }
+}
+
+ion-card-content-descripcion {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  width: 80%;
+
+  ion-item {
+    border-radius: 10px;
+
+    ion-label {
+      color: #4b4b4b;
+    }
+
+    ion-input {
+      border-color: #4b4b4b;
+    }
+  }
+}
+
+.form-header-container {
+  font-size: 25px;
+  font-family: 'Poppins';
+  font-weight: bold;
+  z-index: 1;
+  color: white;
+}
+
+ion-button {
+  position: absolute;
+  width: 25%;
+  height: 9%;
+  top: 80%;
+  left: 65%;
+  border-radius: 30px;
+  font-size: 10px;
+  color: light;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+}
+
+.deleteIonButton {
+  position: absolute;
+  width: 25%;
+  height: 9%;
+  top: 80%;
+  left: 30%;
+  border-radius: 30px;
+  font-size: 10px;
+  color: light;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+}

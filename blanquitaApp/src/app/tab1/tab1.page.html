@@ -1,21 +1,56 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title> Tab 1 </ion-title>
+    <ion-title>Tipos de Producto</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <div class="background-container"></div>
+
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
+      <ion-title size="large">Tipos de Producto</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div>
-    <button (click)="consultarTiposProductos()">
-      <label> Imprimir productos </label>
-    </button>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>Tipos de Producto</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>Clave</ion-col>
+      <ion-col>Descripción</ion-col>
+      <ion-col>Edición</ion-col>
+    </ion-row>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+    <ion-row *ngFor="let row of dataSource">
+      <ion-col>{{ row.clave }}</ion-col>
+      <ion-col>{{ row.descripcion }}</ion-col>
+      <ion-col>
+        <button mat-icon-button color="black" (click)="editProductType(row)">
+          <mat-icon>edit_square</mat-icon>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card-content-clave>
+    <span class="form-header-container">Clave</span>
+    <ion-item>
+      <ion-label position="floating">Clave</ion-label>
+      <ion-input [(ngModel)]="clave" name="nombre" type="text" required maxlength="3"></ion-input>
+    </ion-item>
+  </ion-card-content-clave>
+
+  <ion-card-content-descripcion>
+    <span class="form-header-container">Descripción</span>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-input [(ngModel)]="descripcion" name="nombre" type="text" required></ion-input>
+    </ion-item>
+  </ion-card-content-descripcion>
+
+  <ion-button color="light" shape="round" [disabled]="!isNotEmpty()" (click)="onSubmit()">Confirmar</ion-button>
+
 </ion-content>

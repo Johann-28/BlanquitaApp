@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj": {}
+    "/Users/juancarlosdiaz/Desktop/Mac Anterior/Material Extra/FCFM/7mo Semestre/Diseño de Soluciones/BlanquitaApp/blanquitaAPI/BlanquitaAPI/BlanquitaAPI.csproj": {}
   },
   "projects": {
-    "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj": {
+    "/Users/juancarlosdiaz/Desktop/Mac Anterior/Material Extra/FCFM/7mo Semestre/Diseño de Soluciones/BlanquitaApp/blanquitaAPI/BlanquitaAPI/BlanquitaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj",
+        "projectUniqueName": "/Users/juancarlosdiaz/Desktop/Mac Anterior/Material Extra/FCFM/7mo Semestre/Diseño de Soluciones/BlanquitaApp/blanquitaAPI/BlanquitaAPI/BlanquitaAPI.csproj",
         "projectName": "BlanquitaAPI",
-        "projectPath": "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj",
-        "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
-        "outputPath": "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\obj\\",
+        "projectPath": "/Users/juancarlosdiaz/Desktop/Mac Anterior/Material Extra/FCFM/7mo Semestre/Diseño de Soluciones/BlanquitaApp/blanquitaAPI/BlanquitaAPI/BlanquitaAPI.csproj",
+        "packagesPath": "/Users/juancarlosdiaz/.nuget/packages/",
+        "outputPath": "/Users/juancarlosdiaz/Desktop/Mac Anterior/Material Extra/FCFM/7mo Semestre/Diseño de Soluciones/BlanquitaApp/blanquitaAPI/BlanquitaAPI/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/juancarlosdiaz/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net7.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -86,7 +84,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
         }
       }
     }
