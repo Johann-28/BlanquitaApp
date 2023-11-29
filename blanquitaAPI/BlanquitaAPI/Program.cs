@@ -81,9 +81,10 @@ builder.Services.AddDbContext<TacosBlanquitaContext>(options =>
 builder.Services.AddCors(options =>
 {
   options.AddPolicy("AllowAngularApp",
-      builder => builder.WithOrigins("http://localhost:8100") // URL de tu aplicación Ionic
+      builder => builder.AllowAnyOrigin() // URL de tu aplicación Ionic
                          .AllowAnyHeader()
                          .AllowAnyMethod());
+
 });
 
 var app = builder.Build();
