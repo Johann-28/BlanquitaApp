@@ -1,0 +1,44 @@
+@import url("https://cdn.jsdelivr.net/npm/ag-grid-community@30.2.1/styles/ag-grid.css");
+@import url("https://cdn.jsdelivr.net/npm/ag-grid-community@30.2.1/styles/ag-theme-alpine.css");
+
+
+ion-content{
+    --background: #7D9B77;
+}
+
+.bg-negro{
+    background-color: #272727;
+    color: whitesmoke;
+}
+
+mat-table{
+    background-color: antiquewhite;
+    border: 2px solid antiquewhite;
+}
+
+.color-blanco{
+    color: whitesmoke;
+}
+
+ion-input {
+    --background: whitesmoke;
+    --color: black;
+    width: 25vh;
+    margin-bottom: 2vh; /* Cambia este color según tus preferencias */
+}
+
+ion-textarea {
+    --background: whitesmoke;
+    --color: black;
+    margin-bottom: 2vh;
+    
+}
+
+ion-button{
+    --background: #737373;
+    --color: whitesmoke;
+    width: 20vh;
+    border-radius: 50%;
+    margin-left: auto;
+  margin-right: auto;
+}
