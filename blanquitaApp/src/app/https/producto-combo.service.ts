@@ -21,6 +21,6 @@ export class ProductoComboService {
   }
 
   deletePorComboyProducto(productoComboDTO:ProductoComboDTO):Observable<void>{
-    return this.http.delete<void>(`${this.dataUrl}PorComboyProducto`)
+    return this.http.delete<void>(`${this.dataUrl}PorComboyProducto`,productoComboDTO)
   }
 }
