@@ -7,11 +7,23 @@ import { ComboDTO } from '../dtos/combo-dto';
   providedIn: 'root'
 })
 export class ComboService {
-  private dataUrl = 'Combo'
+  private dataUrl = 'Combo/'
 
   constructor(private http:HttpClient) { }
 
   public getCombos(): Observable<ComboDTO[]>{
     return this.http.get<ComboDTO[]>(this.dataUrl);
+  }
+
+  public postCombo(ComboDTO:ComboDTO):Observable<ComboDTO>{
+    return this.http.post<ComboDTO>(this.dataUrl,ComboDTO);
+  }
+
+  public putCombo(ComboDTO:ComboDTO):Observable<void>{
+    return this.http.put<void>(`${this.dataUrl}${ComboDTO.idCombo}`,ComboDTO)
+  }
+
+  public deleteCombo(idCombo:number):Observable<void>{
+    return this.http.delete<void>(`${this.dataUrl}${idCombo}`)
   }
 }

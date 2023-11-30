@@ -1,17 +1,74 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Tab 3
+      Combos
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="bg-negro">
+          <ion-title style="padding-top: 2vh;">Combos</ion-title>
+          <ion-list class="ng">
+            <ion-item *ngFor="let combo of combos" class="ng">
+              <ion-label>{{combo.descripcion}} - ${{combo.total}}</ion-label>
+              <ion-button slot="end" (click)="eliminarCombo(combo)">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
+              <ion-button slot="end" (click)="editProductType(combo)">
+                <ion-icon name="create-outline"></ion-icon>
+              </ion-button>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-col>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+      <ion-col>
+        <div class="claro">
+          <ion-label>Nombre Combo</ion-label>
+          <ion-input type="text" name="descripcion" [(ngModel)]="combo.descripcion"></ion-input>
+          <ion-label>Precio</ion-label>
+          <ion-input type="number" name="total" [(ngModel)]="combo.total"></ion-input>
+        </div>
+
+        <div class="claro-2">
+            <ion-title style="margin-top: 3vh;">Productos</ion-title>
+            <hr style="background-color: #272727;">
+
+            <div class="max-height">
+              <ion-list>
+                <ion-item *ngFor="let producto of productos">
+                  <ion-button slot="start" (click)="eliminarProducto(producto.idProducto,producto.precio, producto.descripcion)" [disabled]="habilitarBtnMenosProducto(producto.idProducto)"><ion-icon name="remove-circle-outline"></ion-icon></ion-button>
+                  <ion-label class="ion-text-center">{{producto.descripcion}} - ${{producto.precio}}</ion-label>
+                  <ion-button slot="end" (click)="agregarProducto(producto.idProducto,producto.precio, producto.descripcion)"><ion-icon name="add-circle-outline"></ion-icon></ion-button>
+                </ion-item>
+              </ion-list>
+            </div>
+            
+          
+        </div>
+
+      </ion-col>
+
+      <ion-col>
+        <div class="claro">
+          <ion-title>Productos en el combo</ion-title>
+          <ion-list>
+            <ion-item *ngFor="let detalle of detalleOrden">
+              {{detalle.cantidad}}
+              <ion-label class="ion-text-center">{{detalle.descripcion}} - ${{detalle.total}}</ion-label>
+              <ion-button slot="end" (click)="eliminarDeOrden(detalle.idProducto,detalle.idCombo)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <ion-button class="enviar"(click)="enviarCombo()"[disabled]="habilitarBtn()">
+          Confirmar
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
