@@ -126,8 +126,8 @@ export class Tab3Page {
 
   editProductType(row: ComboDTO): void {
     const dialogRef = this.dialog.open(EditarComboComponent, {
-      width: '60%',
-      height: '60%',
+      width: '80%',
+      height: '80%',
       data: row
     });
 
