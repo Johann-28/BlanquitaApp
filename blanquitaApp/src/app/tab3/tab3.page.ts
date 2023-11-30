@@ -67,6 +67,7 @@ export class Tab3Page {
       }
       this.detalleOrden.push(aux);
     }
+    this.obtenerTotalOrden();
   }
 
   eliminarProducto(idProducto:number, precio: number, descripcion:string){
@@ -82,6 +83,7 @@ export class Tab3Page {
           this.detalleOrden = this.detalleOrden.filter(el => el.idProducto != idProducto);
         }
       })
+      this.obtenerTotalOrden();
     }
   }
 
@@ -96,6 +98,7 @@ export class Tab3Page {
     else{
       this.detalleOrden = this.detalleOrden.filter(el => el.idProducto != idProducto);
     }
+    this.obtenerTotalOrden();
   }
 
   enviarCombo(){
@@ -169,6 +172,14 @@ export class Tab3Page {
     });
 
     await mensaje.present()
+  }
+
+  obtenerTotalOrden(){
+    this.combo.total = 0;
+
+    this.detalleOrden.forEach(el => {
+      this.combo.total += el.total;
+    })
   }
 
 }
