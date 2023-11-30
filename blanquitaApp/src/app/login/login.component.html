@@ -1,0 +1,15 @@
+<p>
+  login works!
+</p>
+
+//2 inputs que esten bindeados con correo y password
+<input type="text" class="form-control" id="correo" placeholder="Correo" [(ngModel)]="loginRequest.correo">
+<input type="password" class="form-control" id="password" placeholder="Contraseña" [(ngModel)]="loginRequest.password">
+
+<button type="button" class="btn btn-primary" (click)="login()">Ingresar</button>
+
+<button type="button" class="btn btn-primary" (click)="logout()">Logout</button>
+
+
+
+
