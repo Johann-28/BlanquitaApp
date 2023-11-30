@@ -19,9 +19,17 @@ public class ProductoComboService
         return await _context.ProductoCombo.ToListAsync();
     }
 
-    public async Task<IEnumerable<ProductoCombo>> GetProductoCombo(int id)
+    public async Task<IEnumerable<Object>> GetProductoCombo(int id)
     {
-        return await _context.ProductoCombo.Where(x => x.IdCombo == id).ToListAsync();
+        return await _context.ProductoCombo
+                             .Include(x => x.IdProductoNavigation)
+                             .Where(x => x.IdCombo == id)
+                             .Select(x => new
+                                {
+                                    IdProducto = x.IdProducto,
+                                    Descripcion = x.IdProductoNavigation.Descripcion
+                                })
+                             .ToArrayAsync();
     }
 
     public async Task<bool> PutProductoCombo(int id, ProductoComboDto productoComboDTO)
