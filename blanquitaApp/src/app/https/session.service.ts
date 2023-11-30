@@ -31,6 +31,11 @@ export class SessionService {
       : null;
   }
 
+  public esAdministrador(){
+    const esAdmin = this.obtenerClaveRolUsuarioSesion() === GeneralConstant.CLAVE_USUARIO_ADMINISTRADOR;
+    return esAdmin;
+  }
+
   getDecodedAccessToken(token: string | null): any {
     if (token === null) {
       return null;
