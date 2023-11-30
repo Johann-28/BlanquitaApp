@@ -1,5 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { ComboDTO } from 'src/app/dtos/combo-dto';
 import { ProductoComboService } from '../../https/producto-combo.service';
 import { DetalleOrdenDTO } from '../../dtos/detalle-orden-dto';
@@ -7,6 +7,7 @@ import { ProductoDTO } from 'src/app/dtos/producto-dto';
 import { ProductoService } from '../../https/producto.service';
 import { ProductoComboDTO } from 'src/app/dtos/producto-combo-dto';
 import { ComboService } from '../../https/combo.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-editar-combo',
@@ -25,7 +26,9 @@ export class EditarComboComponent  implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: ComboDTO,
               private productoComboService:ProductoComboService,
               private ProductoService:ProductoService,
-              private ComboService:ComboService) 
+              private ComboService:ComboService,
+              private alertController:AlertController,
+              private dialog: MatDialog) 
   { 
     this.combo = data
   }
@@ -89,7 +92,8 @@ export class EditarComboComponent  implements OnInit {
 
   editarCombo(){
     this.ComboService.putCombo(this.combo).subscribe(res => {
-      
+      this.cerrarModal();
+      this.mostrarMensajeExito();
     })
   }
 
@@ -98,6 +102,20 @@ export class EditarComboComponent  implements OnInit {
       return true;
     }
     return false
+  }
+
+  async mostrarMensajeExito() {
+    const alert = await this.alertController.create({
+      header: 'Éxito',
+      message: 'Los datos se han cargado con éxito.',
+      buttons: ['OK'],
+    });
+
+    await alert.present();
+  }
+
+  cerrarModal(){
+    this.dialog.closeAll();
   }
 
 }

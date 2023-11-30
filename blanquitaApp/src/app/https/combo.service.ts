@@ -22,4 +22,8 @@ export class ComboService {
   public putCombo(ComboDTO:ComboDTO):Observable<void>{
     return this.http.put<void>(`${this.dataUrl}${ComboDTO.idCombo}`,ComboDTO)
   }
+
+  public deleteCombo(idCombo:number):Observable<void>{
+    return this.http.delete<void>(`${this.dataUrl}${idCombo}`)
+  }
 }

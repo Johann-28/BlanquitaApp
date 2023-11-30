@@ -15,6 +15,9 @@
           <ion-list class="ng">
             <ion-item *ngFor="let combo of combos" class="ng">
               <ion-label>{{combo.descripcion}} - ${{combo.total}}</ion-label>
+              <ion-button slot="end" (click)="eliminarCombo(combo)">
+                <ion-icon name="trash-outline"></ion-icon>
+              </ion-button>
               <ion-button slot="end" (click)="editProductType(combo)">
                 <ion-icon name="create-outline"></ion-icon>
               </ion-button>

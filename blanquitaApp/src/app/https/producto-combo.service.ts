@@ -20,7 +20,11 @@ export class ProductoComboService {
     return this.http.get<DetalleOrdenDTO[]>(`${this.dataUrl}${idCombo}`)
   }
 
-  deletePorComboyProducto(producto:number,combo:number):Observable<void>{
+  public deletePorComboyProducto(producto:number,combo:number):Observable<void>{
     return this.http.delete<void>(`${this.dataUrl}PorComboyProducto/${producto}/${combo}`)
+  }
+
+  public deletePorCombo(idCombo:number):Observable<void>{
+    return this.http.delete<void>(`${this.dataUrl}PorCombo/${idCombo}`)
   }
 }

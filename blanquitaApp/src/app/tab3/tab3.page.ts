@@ -9,6 +9,7 @@ import { ProductoComboService } from '../https/producto-combo.service';
 import { ProductoComboDTO } from '../dtos/producto-combo-dto';
 import { MatDialog } from '@angular/material/dialog';
 import { EditarComboComponent } from './editar-combo/editar-combo.component';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -28,7 +29,8 @@ export class Tab3Page {
   constructor(private ComboService:ComboService,
               private ProductoService:ProductoService,
               private ProductoComboService:ProductoComboService,
-              private dialog: MatDialog) {}
+              private dialog: MatDialog,
+              private alertController:AlertController) {}
 
   ionViewWillEnter(){
     this.obtenerCombos();
@@ -110,6 +112,7 @@ export class Tab3Page {
         });
 
         this.obtenerCombos();
+        this.mostrarMensajeExitoAgregar();
         this.combo.descripcion = '';
         this.combo.total = 0;
         this.detalleOrden = []
@@ -137,6 +140,35 @@ export class Tab3Page {
     //     this.dataSource = this.productTypes;
     //   });
     // });
+  }
+
+  eliminarCombo(combo:ComboDTO){
+    this.ProductoComboService.deletePorCombo(combo.idCombo).subscribe(res => {
+      this.ComboService.deleteCombo(combo.idCombo).subscribe(res => {
+        this.mostrarMensajeExitoEliminar();
+        this.obtenerCombos();
+      })
+    })
+  }
+
+  async mostrarMensajeExitoEliminar(){
+    const mensaje = await this.alertController.create({
+      header: 'Exito',
+      message: 'Combo eliminado exitosamente del sistema',
+      buttons: ['Ok']
+    });
+
+    await mensaje.present()
+  }
+
+  async mostrarMensajeExitoAgregar(){
+    const mensaje = await this.alertController.create({
+      header: 'Exito',
+      message: 'Combo agregado exitosamente del sistema',
+      buttons: ['Ok']
+    });
+
+    await mensaje.present()
   }
 
 }
