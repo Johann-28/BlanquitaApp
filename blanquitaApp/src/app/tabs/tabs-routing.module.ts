@@ -5,7 +5,7 @@ import { CorteCajaPageModule } from '../corte-caja/corte-caja.module';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
