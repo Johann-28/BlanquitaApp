@@ -6,6 +6,7 @@ import { DetalleOrdenDTO } from '../../dtos/detalle-orden-dto';
 import { ProductoDTO } from 'src/app/dtos/producto-dto';
 import { ProductoService } from '../../https/producto.service';
 import { ProductoComboDTO } from 'src/app/dtos/producto-combo-dto';
+import { ComboService } from '../../https/combo.service';
 
 @Component({
   selector: 'app-editar-combo',
@@ -23,7 +24,8 @@ export class EditarComboComponent  implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: ComboDTO,
               private productoComboService:ProductoComboService,
-              private ProductoService:ProductoService) 
+              private ProductoService:ProductoService,
+              private ComboService:ComboService) 
   { 
     this.combo = data
   }
@@ -74,23 +76,28 @@ export class EditarComboComponent  implements OnInit {
 
   eliminarDeOrden(idProducto?:number, idCombo?: number){
     if(idProducto){
-      this.detalleOrden = this.detalleOrden.filter(el => el.idCombo != idCombo);
-      
-      let del:ProductoComboDTO = {
-        idCombo: this.combo.idCombo,
-        idProducto: idProducto,
-        idProductoCombo: 0
-      }
-
-      console.log(del)
-
-      this.productoComboService.deletePorComboyProducto(del).subscribe(res => {
+      this.productoComboService.deletePorComboyProducto(idProducto,this.combo.idCombo).subscribe(res => {
 
       })
-    }
-    else{
       this.detalleOrden = this.detalleOrden.filter(el => el.idProducto != idProducto);
     }
+  }
+
+  deshabilitarAgregarBtn(idProducto:number):boolean{
+    return this.detalleOrden.some(x => x.idProducto == idProducto)
+  }
+
+  editarCombo(){
+    this.ComboService.putCombo(this.combo).subscribe(res => {
+      
+    })
+  }
+
+  habilitarBtn():boolean{
+    if(this.combo.descripcion === '' || this.combo.total === 0 || this.detalleOrden.length == 0){
+      return true;
+    }
+    return false
   }
 
 }

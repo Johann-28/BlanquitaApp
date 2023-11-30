@@ -18,4 +18,8 @@ export class ComboService {
   public postCombo(ComboDTO:ComboDTO):Observable<ComboDTO>{
     return this.http.post<ComboDTO>(this.dataUrl,ComboDTO);
   }
+
+  public putCombo(ComboDTO:ComboDTO):Observable<void>{
+    return this.http.put<void>(`${this.dataUrl}${ComboDTO.idCombo}`,ComboDTO)
+  }
 }
