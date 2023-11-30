@@ -1,0 +1,151 @@
+.background-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  background-color: #85AF8A;
+}
+
+ion-title {
+  font-family: 'Poppins';
+}
+
+table {
+  width: 50%;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  border-radius: 15px;
+  overflow: hidden;
+  border: 1px solid #a0a0a0;
+}
+
+.text-container {
+  position: relative;
+  top: 15%;
+  left: 50%;
+  font-size: 30px;
+  font-family: Arial Black, Helvetica, sans-serif;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  color: white;
+}
+
+/* Ion Grid */
+ion-grid {
+  border-collapse: collapse;
+  width: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  margin: 16px;
+  background-color: rgb(31, 31, 31);
+  border-radius: 15px;
+  padding: 10px;
+  max-height: 50%;
+  overflow-y: auto;
+  border-collapse: collapse;
+}
+
+/* Ion Row */
+ion-row {
+  border-bottom: 1px solid #ddd;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+  padding: 5px;
+}
+
+/* Ion Col */
+ion-col {
+  padding: 12px;
+  text-align: center;
+
+  &:first-child {
+    font-weight: bold;
+  }
+}
+
+ion-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Ion Card */
+ion-card {
+  width: 80%;
+  max-width: 400px;
+}
+
+ion-card-header {
+  background-color: #007bff;
+  color: white;
+}
+
+ion-card-content-clave {
+  position: absolute;
+  top: 29%;
+  left: 55%;
+  width: 50%;
+
+  ion-item {
+    border-radius: 10px;
+    width: 30%;
+
+    ion-label {
+      color: #4b4b4b;
+    }
+
+    ion-input {
+      border-color: #4b4b4b;
+    }
+  }
+}
+
+
+ion-card-content-descripcion {
+  position: absolute;
+  top: 29%;
+  left: 75%;
+  width: 50%;
+
+  ion-item {
+    border-radius: 10px;
+    width: 30%;
+
+    ion-label {
+      color: #4b4b4b;
+    }
+
+    ion-input {
+      border-color: #4b4b4b;
+    }
+  }
+}
+
+ion-button {
+  position: absolute;
+  width: 13%;
+  top: 50%;
+  left: 77%;
+  border-radius: 30px;
+  font-size: 10px;
+  color: light;
+  font-weight: bold;
+  font-family: 'Poppins', sans-serif;
+}
+
+.form-header-container {
+  font-size: 25px;
+  font-family: 'Poppins';
+  font-weight: bold;
+  z-index: 1;
+  color: white;
+}
+
+

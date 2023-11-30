@@ -1,0 +1,31 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Actualizar Tipo de Producto</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <div class="background-container"></div>
+
+  <ion-card-content-clave>
+    <span class="form-header-container">Clave</span>
+    <ion-item>
+      <ion-label position="floating">Clave</ion-label>
+      <ion-input [(ngModel)]="clave" name="clave" type="text" required maxlength="3"></ion-input>
+    </ion-item>
+  </ion-card-content-clave>
+
+  <ion-card-content-descripcion>
+    <span class="form-header-container">Descripción</span>
+    <ion-item>
+      <ion-label position="floating">Descripción</ion-label>
+      <ion-input [(ngModel)]="descripcion" name="descripcion" type="text" required></ion-input>
+    </ion-item>
+  </ion-card-content-descripcion>
+
+  <ion-button color="light" shape="round" [disabled]="!isNotEmpty()" (click)="onSubmit()">Confirmar</ion-button>
+
+  <ion-button class="deleteIonButton" color="danger" shape="round" (click)="onSubmitDelete()">Borrar</ion-button>
+
+</ion-content>

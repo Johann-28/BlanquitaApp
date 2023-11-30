@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\felix\\Escritorio\\BlanquitaApp\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj": {}
+    "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj": {}
   },
   "projects": {
-    "C:\\Users\\felix\\Escritorio\\BlanquitaApp\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj": {
+    "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\felix\\Escritorio\\BlanquitaApp\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj",
+        "projectUniqueName": "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj",
         "projectName": "BlanquitaAPI",
-        "projectPath": "C:\\Users\\felix\\Escritorio\\BlanquitaApp\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj",
-        "packagesPath": "C:\\Users\\felix\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\felix\\Escritorio\\BlanquitaApp\\blanquitaAPI\\BlanquitaAPI\\obj\\",
+        "projectPath": "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\BlanquitaAPI.csproj",
+        "packagesPath": "C:\\Users\\johan\\.nuget\\packages\\",
+        "outputPath": "D:\\Repositorios\\Tacos-Blanquita\\blanquitaAPI\\BlanquitaAPI\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\felix\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\johan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
