@@ -2,22 +2,26 @@ import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { TabsPage } from './tabs.page';
 import { CorteCajaPageModule } from '../corte-caja/corte-caja.module';
+import { RoleGuard } from '../auth/RoleGuard';
 
 const routes: Routes = [
   {
-    path: 'tabs',
+    path: '',
     component: TabsPage,
     children: [
       {
         path: 'tab1',
+        canLoad : [RoleGuard],
         loadChildren: () => import('../tab1/tab1.module').then(m => m.Tab1PageModule)
       },
       {
         path: 'tab2',
+        canLoad : [RoleGuard],
         loadChildren: () => import('../tab2/tab2.module').then(m => m.Tab2PageModule)
       },
       {
         path: 'combo',
+        canLoad : [RoleGuard],
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
       {

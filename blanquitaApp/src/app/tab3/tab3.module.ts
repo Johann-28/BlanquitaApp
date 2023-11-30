@@ -14,7 +14,8 @@ import { EditarComboComponent } from './editar-combo/editar-combo.component';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    Tab3PageRoutingModule
+    Tab3PageRoutingModule,
+    LoginModule
   ],
   declarations: [Tab3Page, EditarComboComponent]
 })
