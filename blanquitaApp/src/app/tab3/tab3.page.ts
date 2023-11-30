@@ -5,6 +5,8 @@ import { ProductDTO } from '../DTOs/products.dto';
 import { ProductoService } from '../https/producto.service';
 import { ProductoDTO } from '../dtos/producto-dto';
 import { DetalleOrdenDTO } from '../dtos/detalle-orden-dto';
+import { ProductoComboService } from '../https/producto-combo.service';
+import { ProductoComboDTO } from '../dtos/producto-combo-dto';
 
 @Component({
   selector: 'app-tab3',
@@ -15,9 +17,15 @@ export class Tab3Page {
   combos:ComboDTO[] = [];
   productos:ProductoDTO[] = [];
   detalleOrden: DetalleOrdenDTO[] = [];
+  combo: ComboDTO = {
+    idCombo: 0,
+    descripcion: '',
+    total:0
+  }
 
   constructor(private ComboService:ComboService,
-              private ProductoService:ProductoService) {}
+              private ProductoService:ProductoService,
+              private ProductoComboService:ProductoComboService) {}
 
   ionViewWillEnter(){
     this.obtenerCombos();
@@ -83,6 +91,34 @@ export class Tab3Page {
     else{
       this.detalleOrden = this.detalleOrden.filter(el => el.idProducto != idProducto);
     }
+  }
+
+  enviarCombo(){
+    this.ComboService.postCombo(this.combo).subscribe(res => {
+      this.detalleOrden.forEach(x => {
+        let aux:ProductoComboDTO = {
+          idProductoCombo: 0,
+          idCombo: res.idCombo,
+          idProducto: x.idProducto || 0,
+        };
+
+        this.ProductoComboService.postProductoCombo(aux).subscribe(res => {
+
+        });
+
+        this.obtenerCombos();
+        this.combo.descripcion = '';
+        this.combo.total = 0;
+        this.detalleOrden = []
+      })
+    })
+  }
+
+  habilitarBtn():boolean{
+    if(this.combo.descripcion === '' || this.combo.total === 0 || this.detalleOrden.length == 0){
+      return true;
+    }
+    return false
   }
 
 }

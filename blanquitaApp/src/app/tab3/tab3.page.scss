@@ -8,13 +8,13 @@ ion-content{
     height: 35vh;
 }
 
-ion-item{
+ion-item.ng{
     --background: #272727;
     --border-color: whitesmoke;
     color: whitesmoke;
 }
 
-ion-list{
+ion-list.ng{
     --background: #272727;
     background-color: #272727;
     height: 90%;
@@ -39,4 +39,18 @@ ion-input {
 
 .max-height{
     height: 30vh;
+}
+
+ion-button.enviar{
+    --background: #737373;
+    --color: whitesmoke;
+    width: 20vh;
+    border-radius: 50%;
+    margin-left: auto;
+  margin-right: auto;
+}
+
+ion-list{
+    height: 90%;
+    overflow-y: auto;
 }

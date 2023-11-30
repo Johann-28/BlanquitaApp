@@ -12,8 +12,8 @@
       <ion-col>
         <div class="bg-negro">
           <ion-title style="padding-top: 2vh;">Combos</ion-title>
-          <ion-list>
-            <ion-item *ngFor="let combo of combos">
+          <ion-list class="ng">
+            <ion-item *ngFor="let combo of combos" class="ng">
               <ion-label>{{combo.descripcion}} - ${{combo.total}}</ion-label>
             </ion-item>
           </ion-list>
@@ -23,7 +23,9 @@
       <ion-col>
         <div class="claro">
           <ion-label>Nombre Combo</ion-label>
-          <ion-input type="text" name="total"></ion-input>
+          <ion-input type="text" name="descripcion" [(ngModel)]="combo.descripcion"></ion-input>
+          <ion-label>Precio</ion-label>
+          <ion-input type="number" name="total" [(ngModel)]="combo.total"></ion-input>
         </div>
 
         <div class="claro-2">
@@ -56,6 +58,10 @@
             </ion-item>
           </ion-list>
         </div>
+
+        <ion-button class="enviar"(click)="enviarCombo()"[disabled]="habilitarBtn()">
+          Confirmar
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
