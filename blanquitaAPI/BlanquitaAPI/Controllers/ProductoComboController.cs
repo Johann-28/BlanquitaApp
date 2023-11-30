@@ -75,11 +75,11 @@ namespace BlanquitaAPI.Controllers
             return NoContent();
         }
 
-        [HttpDelete("PorComboyProducto")]
-        public async Task<IActionResult> DeleteComboPorComboProducto(ProductoComboDto productoComboDto)
+        [HttpDelete("PorComboyProducto/{producto}/{combo}")]
+        public async Task<IActionResult> DeleteComboPorComboProducto(int producto, int combo)
         {
-            var combo = await _productoComboService.DeleteProductoComboPorComboyProducto(productoComboDto.IdProducto,productoComboDto.IdCombo);
-            if (combo == null)
+            var res = await _productoComboService.DeleteProductoComboPorComboyProducto(producto,combo);
+            if (res == null)
             {
                 return NotFound();
             }
