@@ -7,6 +7,8 @@ import { ProductoDTO } from '../dtos/producto-dto';
 import { DetalleOrdenDTO } from '../dtos/detalle-orden-dto';
 import { ProductoComboService } from '../https/producto-combo.service';
 import { ProductoComboDTO } from '../dtos/producto-combo-dto';
+import { MatDialog } from '@angular/material/dialog';
+import { EditarComboComponent } from './editar-combo/editar-combo.component';
 
 @Component({
   selector: 'app-tab3',
@@ -25,7 +27,8 @@ export class Tab3Page {
 
   constructor(private ComboService:ComboService,
               private ProductoService:ProductoService,
-              private ProductoComboService:ProductoComboService) {}
+              private ProductoComboService:ProductoComboService,
+              private dialog: MatDialog) {}
 
   ionViewWillEnter(){
     this.obtenerCombos();
@@ -119,6 +122,21 @@ export class Tab3Page {
       return true;
     }
     return false
+  }
+
+  editProductType(row: ComboDTO): void {
+    const dialogRef = this.dialog.open(EditarComboComponent, {
+      width: '60%',
+      height: '60%',
+      data: row
+    });
+
+    // dialogRef.afterClosed().subscribe(result => {
+    //     this.tipoProductoService.getApiData().subscribe((productTypesData: ProductTypeDTO[]) => {
+    //     this.productTypes = productTypesData;
+    //     this.dataSource = this.productTypes;
+    //   });
+    // });
   }
 
 }

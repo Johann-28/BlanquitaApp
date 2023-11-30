@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Editar Combo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeMd="6">
+        <div class="claro">
+          <ion-title tyle="padding-top 3vh;">Informacion del combo</ion-title>
+          <ion-label style="margin-top: 3vh;">Nombre Combo</ion-label>
+          <ion-input type="text" name="descripcion" [(ngModel)]="combo.descripcion" style="margin-bottom: 3vh;"></ion-input>
+          <ion-label>Precio</ion-label>
+          <ion-input type="number" name="total" [(ngModel)]="combo.total"></ion-input>
+        </div>
+      </ion-col>
+  
+      <ion-col sizeMd="6">
+  
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  
+</ion-content>
+
+<ion-footer>
+  <ion-button color="light" shape="round" >Confirmar</ion-button>
+
+<ion-button class="deleteIonButton" color="danger" shape="round" >Borrar</ion-button>
+</ion-footer>
+
+
