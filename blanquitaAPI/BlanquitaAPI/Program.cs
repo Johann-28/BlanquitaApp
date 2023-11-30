@@ -61,6 +61,7 @@ builder.Services.AddScoped<PerfilService>();
 builder.Services.AddScoped<ProductoService>();
 builder.Services.AddScoped<TipoProductoService>();
 builder.Services.AddScoped<CorteCajaService>();
+builder.Services.AddScoped<ProductoComboService>();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         .AddJwtBearer(options =>

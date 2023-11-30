@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrdenService {
-  private dataUrl = 'Orden'
+  private dataUrl = 'Orden/'
 
   constructor(private http: HttpClient) { }
 

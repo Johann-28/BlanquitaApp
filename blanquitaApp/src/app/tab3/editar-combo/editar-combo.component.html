@@ -1,0 +1,55 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Editar Combo
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid>
+    <ion-row>
+      <ion-col sizeMd="6">
+        <div class="claro">
+          <ion-title tyle="padding-top 3vh;">Informacion del combo</ion-title>
+          <ion-label style="margin-top: 3vh;">Nombre Combo</ion-label>
+          <ion-input type="text" name="descripcion" [(ngModel)]="combo.descripcion" style="margin-bottom: 3vh;"></ion-input>
+          <ion-label>Precio</ion-label>
+          <ion-input type="number" name="total" [(ngModel)]="combo.total"></ion-input>
+        </div>
+      </ion-col>
+  
+      <ion-col sizeMd="6">
+        <div class="max-height">
+          <ion-title>Productos en el combo</ion-title>
+          <ion-list>
+            <ion-item *ngFor="let detalle of detalleOrden">
+              <ion-label class="ion-text-center">{{detalle.descripcion}}</ion-label>
+              <ion-button slot="end" (click)="eliminarDeOrden(detalle.idProducto,detalle.idCombo)"><ion-icon name="trash-outline"></ion-icon></ion-button>
+            </ion-item>
+          </ion-list>
+        </div>
+
+        <div class="max-height">
+          <ion-title>Productos</ion-title>
+          <ion-list>
+                <ion-item *ngFor="let producto of productos">
+                  <ion-label class="ion-text-center">{{producto.descripcion}} - ${{producto.precio}}</ion-label>
+                  <ion-button slot="end" (click)="agregarProducto(producto.idProducto,producto.precio, producto.descripcion)" [disabled]="deshabilitarAgregarBtn(producto.idProducto)"><ion-icon name="add-circle-outline"></ion-icon></ion-button>
+                </ion-item>
+              </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  
+</ion-content>
+
+<ion-footer class="ion-text-center">
+  <ion-button color="light" shape="round" color="success" [disabled]="habilitarBtn()" (click)="editarCombo()">Confirmar</ion-button>
+
+<ion-button class="deleteIonButton" color="danger" shape="round" (click)="cerrarModal()" >Cerrar</ion-button>
+</ion-footer>
+
+

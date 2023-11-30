@@ -1,0 +1,56 @@
+ion-content{
+    --background: #7D9B77;
+}
+
+.bg-negro{
+    background-color: #272727;
+    color: whitesmoke;
+    height: 35vh;
+}
+
+ion-item.ng{
+    --background: #272727;
+    --border-color: whitesmoke;
+    color: whitesmoke;
+}
+
+ion-list.ng{
+    --background: #272727;
+    background-color: #272727;
+    height: 90%;
+    overflow-y: auto;
+}
+
+.claro{
+    color: whitesmoke;
+}
+
+ion-input {
+    --background: whitesmoke;
+    --color: black;
+    
+    margin-bottom: 2vh; /* Cambia este color según tus preferencias */
+}
+
+.claro-2{
+    color: #272727;
+    background-color: whitesmoke;
+}
+
+.max-height{
+    height: 30vh;
+}
+
+ion-button.enviar{
+    --background: #737373;
+    --color: whitesmoke;
+    width: 20vh;
+    border-radius: 50%;
+    margin-left: auto;
+  margin-right: auto;
+}
+
+ion-list{
+    height: 90%;
+    overflow-y: auto;
+}
