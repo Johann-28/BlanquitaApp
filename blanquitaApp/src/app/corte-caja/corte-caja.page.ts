@@ -10,7 +10,7 @@ import { Form } from '@angular/forms';
   templateUrl: './corte-caja.page.html',
   styleUrls: ['./corte-caja.page.scss'],
 })
-export class CorteCajaPage implements OnInit {
+export class CorteCajaPage {
   listadoOrdenes:CorteCajaListadoDTO[] = [];
   displayedColumns: any[] = [
     {headerName:"Responsable", field: 'nombre'},
@@ -43,7 +43,11 @@ export class CorteCajaPage implements OnInit {
 
   constructor(private corteCajaService:CorteCajaService) { }
 
-  ngOnInit() {
+  /*ngOnInit() {
+    this.obtenerListadoDeOrdenes()
+    this.obtenerListadoSuma()
+  }*/
+  ionViewWillEnter(){
     this.obtenerListadoDeOrdenes()
     this.obtenerListadoSuma()
   }
