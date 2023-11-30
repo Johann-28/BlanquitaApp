@@ -1,7 +1,7 @@
 export class ProductDTO {
 idProducto?: number;
 idTipoProducto?: number;
-descripcion?: number;
+descripcion?: string;
 precio?: number; 
 }
 

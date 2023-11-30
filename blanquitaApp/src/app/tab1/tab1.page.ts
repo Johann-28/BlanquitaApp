@@ -56,6 +56,7 @@ export class Tab1Page implements OnInit {
         this.tipoProductoService.getApiData().subscribe((productTypesData: ProductTypeDTO[]) => {
         this.productTypes = productTypesData;
         this.dataSource = this.productTypes;
+        this.ngOnInit();
       });
     });
   }
