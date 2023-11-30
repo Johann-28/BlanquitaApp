@@ -1,16 +1,16 @@
 <ion-tabs>
   <ion-tab-bar slot="bottom">
-    <ion-tab-button tab="tab1" href="/tabs/tab1">
+    <ion-tab-button tab="tab1" href="/tabs/tab1" *ngIf="esAdmin">
       <ion-icon aria-hidden="true" name="triangle"></ion-icon>
       <ion-label>Tipo producto</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="tab2" href="/tabs/tab2">
+    <ion-tab-button tab="tab2" href="/tabs/tab2" *ngIf="esAdmin">
       <ion-icon aria-hidden="true" name="ellipse"></ion-icon>
       <ion-label>Productos</ion-label>
     </ion-tab-button>
 
-    <ion-tab-button tab="combo" href="/tabs/combo">
+    <ion-tab-button tab="combo" href="/tabs/combo"  *ngIf="esAdmin">
       <ion-icon aria-hidden="true" name="square"></ion-icon>
       <ion-label>Combo</ion-label>
     </ion-tab-button>

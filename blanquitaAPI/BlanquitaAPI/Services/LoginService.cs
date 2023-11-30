@@ -42,7 +42,7 @@ public class LoginService
         {
                 new Claim(ClaimTypes.NameIdentifier, usuario.IdUsuario.ToString()),
                 new Claim(ClaimTypes.Name, usuario.Nombre),
-                new Claim(ClaimTypes.Role , usuario.IdPerfilNavigation.Nombre)
+                new Claim(ClaimTypes.Role , usuario.IdPerfilNavigation.Clave)
             };
 
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("JWT:Key").Value));
