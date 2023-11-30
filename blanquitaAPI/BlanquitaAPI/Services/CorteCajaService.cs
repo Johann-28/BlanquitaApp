@@ -103,12 +103,11 @@ public class CorteCajaService
     public async Task<IEnumerable<Object>> ObtenerListado(DateTime fecha)
     {
         return await _context.Orden
-                .GroupBy(o => new { o.IdUsuario, o.Fecha })
-                .Where(o => o.Key.Fecha == fecha)
+                .Where(o => o.Fecha == fecha)
                 .Select(o => new {
-                            Total = o.Sum(x => x.Total),
-                            Nombre =  _context.Usuario.Where(x => x.IdUsuario == o.Key.IdUsuario).FirstOrDefault().Nombre,
-                            Fecha = o.Key.Fecha
+                            Total = o.Total,
+                            Nombre =  _context.Usuario.Where(x => x.IdUsuario == o.IdUsuario).FirstOrDefault().Nombre,
+                            Fecha = o.Fecha
                         })
                 .ToListAsync();
                 
