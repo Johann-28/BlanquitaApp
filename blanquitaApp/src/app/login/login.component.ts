@@ -41,11 +41,17 @@ export class LoginComponent implements OnInit {
       },
       complete: () => {
         this.submiting = false;
+        this.limpiarCampos();
       },
     });
   }
 
   protected cerrarModal() {
     this.modalAbierto = false;
+  }
+
+  private limpiarCampos() {
+    this.loginRequest.correo = ' ';
+    this.loginRequest.password = '';
   }
 }
