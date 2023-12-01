@@ -10,6 +10,7 @@ import { ProductoComboDTO } from '../dtos/producto-combo-dto';
 import { MatDialog } from '@angular/material/dialog';
 import { EditarComboComponent } from './editar-combo/editar-combo.component';
 import { AlertController } from '@ionic/angular';
+import { TitleService } from '../https/title.service';
 
 @Component({
   selector: 'app-tab3',
@@ -17,6 +18,7 @@ import { AlertController } from '@ionic/angular';
   styleUrls: ['tab3.page.scss']
 })
 export class Tab3Page {
+  protected titulo = 'Combos';
   combos:ComboDTO[] = [];
   productos:ProductoDTO[] = [];
   detalleOrden: DetalleOrdenDTO[] = [];
@@ -30,11 +32,13 @@ export class Tab3Page {
               private ProductoService:ProductoService,
               private ProductoComboService:ProductoComboService,
               private dialog: MatDialog,
-              private alertController:AlertController) {}
+              private alertController:AlertController,
+              private titleService : TitleService) {}
 
   ionViewWillEnter(){
     this.obtenerCombos();
     this.obtenerProductos();
+    this.changeTitle();
   }
 
   obtenerCombos(){
@@ -180,6 +184,10 @@ export class Tab3Page {
     this.detalleOrden.forEach(el => {
       this.combo.total += el.total;
     })
+  }
+
+  changeTitle(){
+    this.titleService.changeTitle(this.titulo);
   }
 
 }

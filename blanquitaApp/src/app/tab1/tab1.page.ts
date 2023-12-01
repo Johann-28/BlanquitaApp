@@ -3,6 +3,7 @@ import { TipoProductoService } from '../https/tipo-producto.service';
 import { ProductTypeDTO } from '../DTOs/products.dto';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { TitleService } from '../https/title.service';
 
 @Component({
   selector: 'app-tab1',
@@ -17,11 +18,12 @@ export class Tab1Page implements OnInit {
   productTypes: ProductTypeDTO[] = [];
   clave: string = '';
   descripcion: string = '';
+  protected titulo = 'Tipos de productos';
 
   constructor(
     private dialog: MatDialog,
     private tipoProductoService: TipoProductoService,
-    private cdr: ChangeDetectorRef
+    private titleService : TitleService,
   ) {
     
   }
@@ -31,6 +33,10 @@ export class Tab1Page implements OnInit {
       this.productTypes = productTypesData;
       this.dataSource = this.productTypes;
     });
+  }
+
+  ionViewWillEnter(){
+    this.changeTitle();
   }
 
   consultarTiposProductos() {
@@ -74,5 +80,9 @@ export class Tab1Page implements OnInit {
         });
     });
 
+  }
+
+  changeTitle(){
+    this.titleService.changeTitle(this.titulo);
   }
 }

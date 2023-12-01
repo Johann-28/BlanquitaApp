@@ -4,6 +4,7 @@ import { ProductDTO, ProductTypeDTO } from '../DTOs/products.dto';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { ProductoService } from '../https/productos.service';
+import { TitleService } from '../https/title.service';
 
 @Component({
   selector: 'app-tab2',
@@ -18,6 +19,7 @@ export class Tab2Page implements OnInit {
   descripcion: string = '';
   idTipoProducto: number = 0;
   productTypes: ProductTypeDTO[] = [];
+  protected titulo = 'Productos';
 
   producto = new ProductDTO;
   productos: ProductDTO[] = []
@@ -25,9 +27,14 @@ export class Tab2Page implements OnInit {
   constructor(
     private dialog: MatDialog,
     private productoService: ProductoService,
-    private tipoProductoService: TipoProductoService
+    private tipoProductoService: TipoProductoService,
+    private titleService : TitleService
   ) {
     
+  }
+
+  ionViewWillEnter(){
+    this.changeTitle();
   }
 
   ngOnInit(): void {
@@ -82,6 +89,10 @@ export class Tab2Page implements OnInit {
   getTipoProductoDescription(idTipoProducto: any): any {
     const tipoProducto = this.productTypes.find(tipo => tipo.idTipoProducto === idTipoProducto);
     return tipoProducto?.descripcion ?? '';
+  }
+
+  changeTitle(){
+    this.titleService.changeTitle(this.titulo);
   }
   
 }

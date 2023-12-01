@@ -7,6 +7,7 @@ import { ComboService } from '../https/combo.service';
 import { ComboDTO } from '../dtos/combo-dto';
 import { OrdenService } from '../https/orden.service';
 import { SessionService } from '../https/session.service';
+import { TitleService } from '../https/title.service';
 
 @Component({
   selector: 'app-orden',
@@ -14,6 +15,7 @@ import { SessionService } from '../https/session.service';
   styleUrls: ['./orden.page.scss'],
 })
 export class OrdenPage implements OnInit {
+  protected titulo = 'Orden';
   productos: ProductoDTO[] = [];
   combos:ComboDTO[] = [];
   detalleOrden: DetalleOrdenDTO[] = [];
@@ -26,11 +28,16 @@ export class OrdenPage implements OnInit {
   constructor(private productoService:ProductoService,
               private comboService:ComboService,
               private ordenService:OrdenService,
-              private sessionService : SessionService) { }
+              private sessionService : SessionService,
+              private titleService : TitleService) { }
 
   ngOnInit() {
     this.getProductos()
     this.getCombos();
+  }
+
+  ionViewWillEnter(){
+    this.changeTitle();
   }
 
   getProductos(){
@@ -173,6 +180,10 @@ export class OrdenPage implements OnInit {
     }else {
       return 1;
     }
+  }
+
+  changeTitle(){
+    this.titleService.changeTitle(this.titulo);
   }
 
 }

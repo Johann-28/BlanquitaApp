@@ -5,6 +5,7 @@ import { ObtenerListadoFormDTO } from '../dtos/obtener-listado-form-dto';
 import { CorteCajaFormDTO } from '../dtos/corte-caja-form-dto';
 import { Form } from '@angular/forms';
 import { SessionService } from '../https/session.service';
+import { TitleService } from '../https/title.service';
 
 @Component({
   selector: 'app-corte-caja',
@@ -12,6 +13,7 @@ import { SessionService } from '../https/session.service';
   styleUrls: ['./corte-caja.page.scss'],
 })
 export class CorteCajaPage {
+  protected titulo = 'Corte de caja';
   listadoOrdenes:CorteCajaListadoDTO[] = [];
   displayedColumns: any[] = [
     {headerName:"Responsable", field: 'nombre'},
@@ -42,15 +44,12 @@ export class CorteCajaPage {
     saldoInicial :0
   };
 
-  constructor(private corteCajaService:CorteCajaService , private sessionService : SessionService) { }
+  constructor(private corteCajaService:CorteCajaService , private sessionService : SessionService , private titleService : TitleService) { }
 
-  /*ngOnInit() {
-    this.obtenerListadoDeOrdenes()
-    this.obtenerListadoSuma()
-  }*/
   ionViewWillEnter(){
     this.obtenerListadoDeOrdenes()
     this.obtenerListadoSuma()
+    this.changeTitle();
   }
 
   obtenerListadoDeOrdenes(){
@@ -112,6 +111,10 @@ export class CorteCajaPage {
       return 0;
     }
 
+  }
+
+  changeTitle(){
+    this.titleService.changeTitle(this.titulo);
   }
 
 }
