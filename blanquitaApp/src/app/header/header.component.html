@@ -1,6 +1,6 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title></ion-title>
+    <ion-title>{{ title }}</ion-title>
 
     <ion-button id="click-trigger"
       ><ion-avatar>
@@ -14,7 +14,7 @@
         <ng-template>
           <ion-content
             class="ion-padding ion-activatable ripple-parent rounded-rectangle"
-            (click) = "logout()"
+            (click)="logout()"
             >Logout
             <ion-ripple-effect></ion-ripple-effect>
           </ion-content>
@@ -22,6 +22,6 @@
       </div>
     </ion-popover>
 
-    <ion-label>{{nombreUsuario}}</ion-label>
+    <ion-label>{{ nombreUsuario }}</ion-label>
   </ion-toolbar>
 </ion-header>
