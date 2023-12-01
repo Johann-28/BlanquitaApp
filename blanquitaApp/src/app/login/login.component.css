@@ -6,6 +6,7 @@ ion-img {
 
 .contenedor {
   display: flex;
+  height: 100vh;
 }
 
 .formulario {
