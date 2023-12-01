@@ -10,12 +10,15 @@ import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { BaseUrlInterceptor } from './auth/interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AuthService } from './https/auth.service';
+import { HeaderModule } from './header/header.module';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule , HttpClientModule, MatTableModule, BrowserAnimationsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule , HttpClientModule, MatTableModule, BrowserAnimationsModule, HeaderModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true }],
+    { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
+  AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
