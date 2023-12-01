@@ -24,7 +24,7 @@ export class Tab1Page implements OnInit {
   constructor(
     private dialog: MatDialog,
     private tipoProductoService: TipoProductoService,
-    private titleService : TitleService,,
+    private titleService : TitleService,  
     private AlertService:AlertService
   ) {
     
