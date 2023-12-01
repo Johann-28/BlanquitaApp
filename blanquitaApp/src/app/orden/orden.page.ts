@@ -6,6 +6,7 @@ import { OrdenFormDTO } from '../dtos/orden-form-dto';
 import { ComboService } from '../https/combo.service';
 import { ComboDTO } from '../dtos/combo-dto';
 import { OrdenService } from '../https/orden.service';
+import { SessionService } from '../https/session.service';
 
 @Component({
   selector: 'app-orden',
@@ -17,14 +18,15 @@ export class OrdenPage implements OnInit {
   combos:ComboDTO[] = [];
   detalleOrden: DetalleOrdenDTO[] = [];
   orden: OrdenFormDTO = {
-    idUsuario: 1,
+    idUsuario: this.obtenerIdUsuario(),
     total: 0,
     fecha: new Date()
   }
 
   constructor(private productoService:ProductoService,
               private comboService:ComboService,
-              private ordenService:OrdenService) { }
+              private ordenService:OrdenService,
+              private sessionService : SessionService) { }
 
   ngOnInit() {
     this.getProductos()
@@ -34,7 +36,6 @@ export class OrdenPage implements OnInit {
   getProductos(){
     this.productoService.getProductos().subscribe(res => {
       this.productos = res;
-      console.log(this.productos);
     })
   }
 
@@ -163,6 +164,15 @@ export class OrdenPage implements OnInit {
       this.detalleOrden = []
       this.obtenerTotalOrden()
     })
+  }
+
+  obtenerIdUsuario(): number{
+    const idUsuario = this.sessionService.obtenerIdUsuarioSesion();
+    if(idUsuario){
+      return idUsuario;
+    }else {
+      return 1;
+    }
   }
 
 }
