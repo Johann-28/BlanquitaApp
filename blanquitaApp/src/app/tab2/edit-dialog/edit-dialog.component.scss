@@ -97,3 +97,12 @@ ion-button {
   font-weight: bold;
   font-family: 'Poppins', sans-serif;
 }
+
+.modal{
+  position: relative; /* o position: absolute; o position: fixed; según tus necesidades */
+  z-index: 9999;
+}
+
+mat-select {
+  color: whitesmoke;
+}

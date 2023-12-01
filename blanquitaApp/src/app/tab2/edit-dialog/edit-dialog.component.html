@@ -27,11 +27,11 @@
   <ion-card-content-tipoProducto>
     <span class="form-header-container">Tipo de Producto</span>
     <ion-item>
-      <ion-select [(ngModel)]="idTipoProducto">
-        <ion-select-option *ngFor="let element of productTypes" [value]="element.idTipoProducto">
+      <mat-select [(ngModel)]="idTipoProducto">
+        <mat-option *ngFor="let element of productTypes" [value]="element.idTipoProducto">
           {{element.descripcion}}
-        </ion-select-option>
-      </ion-select>
+        </mat-option>
+      </mat-select>
     </ion-item>
     
   </ion-card-content-tipoProducto>
