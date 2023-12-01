@@ -8,6 +8,7 @@ import { ProductoService } from '../../https/producto.service';
 import { ProductoComboDTO } from 'src/app/dtos/producto-combo-dto';
 import { ComboService } from '../../https/combo.service';
 import { AlertController } from '@ionic/angular';
+import { AlertService } from '../../https/alert.service';
 
 @Component({
   selector: 'app-editar-combo',
@@ -27,7 +28,7 @@ export class EditarComboComponent  implements OnInit {
               private productoComboService:ProductoComboService,
               private ProductoService:ProductoService,
               private ComboService:ComboService,
-              private alertController:AlertController,
+              private AlertService:AlertService,
               private dialog: MatDialog) 
   { 
     this.combo = data
@@ -93,7 +94,7 @@ export class EditarComboComponent  implements OnInit {
   editarCombo(){
     this.ComboService.putCombo(this.combo).subscribe(res => {
       this.cerrarModal();
-      this.mostrarMensajeExito();
+      this.AlertService.mostrarModal('Exito','Se edito exitosamente el combo')
     })
   }
 
@@ -102,16 +103,6 @@ export class EditarComboComponent  implements OnInit {
       return true;
     }
     return false
-  }
-
-  async mostrarMensajeExito() {
-    const alert = await this.alertController.create({
-      header: 'Éxito',
-      message: 'Los datos se han cargado con éxito.',
-      buttons: ['OK'],
-    });
-
-    await alert.present();
   }
 
   cerrarModal(){

@@ -10,6 +10,7 @@ import { ProductoComboDTO } from '../dtos/producto-combo-dto';
 import { MatDialog } from '@angular/material/dialog';
 import { EditarComboComponent } from './editar-combo/editar-combo.component';
 import { AlertController } from '@ionic/angular';
+import { AlertService } from '../https/alert.service';
 
 @Component({
   selector: 'app-tab3',
@@ -30,7 +31,8 @@ export class Tab3Page {
               private ProductoService:ProductoService,
               private ProductoComboService:ProductoComboService,
               private dialog: MatDialog,
-              private alertController:AlertController) {}
+              private alertController:AlertController,
+              private alertService:AlertService) {}
 
   ionViewWillEnter(){
     this.obtenerCombos();
@@ -115,7 +117,7 @@ export class Tab3Page {
         });
 
         this.obtenerCombos();
-        this.mostrarMensajeExitoAgregar();
+        this.alertService.mostrarModal('Exito','Se agrego el combo exitosamente al sistema')
         this.combo.descripcion = '';
         this.combo.total = 0;
         this.detalleOrden = []
@@ -148,31 +150,12 @@ export class Tab3Page {
   eliminarCombo(combo:ComboDTO){
     this.ProductoComboService.deletePorCombo(combo.idCombo).subscribe(res => {
       this.ComboService.deleteCombo(combo.idCombo).subscribe(res => {
-        this.mostrarMensajeExitoEliminar();
+        this.alertService.mostrarModal('Exito','Combo eliminado exitosamente en el sistema')
         this.obtenerCombos();
       })
     })
   }
 
-  async mostrarMensajeExitoEliminar(){
-    const mensaje = await this.alertController.create({
-      header: 'Exito',
-      message: 'Combo eliminado exitosamente del sistema',
-      buttons: ['Ok']
-    });
-
-    await mensaje.present()
-  }
-
-  async mostrarMensajeExitoAgregar(){
-    const mensaje = await this.alertController.create({
-      header: 'Exito',
-      message: 'Combo agregado exitosamente del sistema',
-      buttons: ['Ok']
-    });
-
-    await mensaje.present()
-  }
 
   obtenerTotalOrden(){
     this.combo.total = 0;

@@ -5,6 +5,7 @@ import { ObtenerListadoFormDTO } from '../dtos/obtener-listado-form-dto';
 import { CorteCajaFormDTO } from '../dtos/corte-caja-form-dto';
 import { Form } from '@angular/forms';
 import { SessionService } from '../https/session.service';
+import { AlertService } from '../https/alert.service';
 
 @Component({
   selector: 'app-corte-caja',
@@ -42,7 +43,8 @@ export class CorteCajaPage {
     saldoInicial :0
   };
 
-  constructor(private corteCajaService:CorteCajaService , private sessionService : SessionService) { }
+  constructor(private corteCajaService:CorteCajaService , private sessionService : SessionService,
+              private AlertService:AlertService) { }
 
   /*ngOnInit() {
     this.obtenerListadoDeOrdenes()
@@ -100,6 +102,8 @@ export class CorteCajaPage {
         this.corteCaja.saldoInicial = res.total
       })
       this.corteCaja.saldoFinal = 0;
+
+      this.AlertService.mostrarModal('Exito','Se realizo el corte de caja de manera exitosa')
     })
   }
 
