@@ -11,12 +11,16 @@ export class AuthService {
   constructor(private http: HttpClient , private router : Router) {}
   private dataUrl = 'login/';
 
-  login(credentials: LoginRequestDto) {
+  login(credentials: LoginRequestDto , recuerdame : boolean) {
     return this.http
       .post(this.dataUrl + 'authenticate', credentials)
       .pipe(
         tap((response: any) =>{
-          localStorage.setItem('jwt', response.token);
+          if(recuerdame){
+            localStorage.setItem('jwt', response.token);
+          }else{
+            sessionStorage.setItem('jwt', response.token);
+          }
           this.router.navigate(['tabs']);
         } )
       );
@@ -24,10 +28,11 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('jwt');
+    sessionStorage.removeItem('jwt');
     this.router.navigate(['login']);
   }
 
   isLoggedIn() {
-    return !!localStorage.getItem('jwt');
+    return !!localStorage.getItem('jwt') || !!sessionStorage.getItem('jwt');
   }
 }

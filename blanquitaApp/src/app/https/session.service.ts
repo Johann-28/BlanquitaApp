@@ -10,29 +10,27 @@ export class SessionService {
   constructor(private http: HttpClient) {}
 
   public obtenerIdUsuarioSesion(): number | null {
-    const token = localStorage.getItem('jwt');
+    const token = this.getToken();
     const decodedToken = this.getDecodedAccessToken(token);
     return token
       ? decodedToken[GeneralConstant.CONFIG.claims.nameIdentifier]
       : null;
   }
   public obtenerClaveRolUsuarioSesion(): string | null {
-    const token = localStorage.getItem('jwt');
+    const token = this.getToken();
     const decodedToken = this.getDecodedAccessToken(token);
-    return token
-      ? decodedToken[GeneralConstant.CONFIG.claims.role]
-      : null;
+    return token ? decodedToken[GeneralConstant.CONFIG.claims.role] : null;
   }
   public obtenerNombreUsuarioSesion(): string | null {
-    const token = localStorage.getItem('jwt');
+    const token = this.getToken();
     const decodedToken = this.getDecodedAccessToken(token);
-    return token
-      ? decodedToken[GeneralConstant.CONFIG.claims.name]
-      : null;
+    return token ? decodedToken[GeneralConstant.CONFIG.claims.name] : null;
   }
 
-  public esAdministrador(){
-    const esAdmin = this.obtenerClaveRolUsuarioSesion() === GeneralConstant.CLAVE_USUARIO_ADMINISTRADOR;
+  public esAdministrador() {
+    const esAdmin =
+      this.obtenerClaveRolUsuarioSesion() ===
+      GeneralConstant.CLAVE_USUARIO_ADMINISTRADOR;
     return esAdmin;
   }
 
@@ -48,5 +46,9 @@ export class SessionService {
     } catch (Error) {
       return null;
     }
+  }
+
+  private getToken(): string | null {
+    return localStorage.getItem('jwt') || sessionStorage.getItem('jwt');
   }
 }

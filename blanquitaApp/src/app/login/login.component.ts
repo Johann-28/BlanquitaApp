@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   protected modalAbierto: boolean = false;
   protected mensajeModal: string = '';
   protected recuerdame : boolean = false;
+  protected submiting : boolean = false;
 
   ngOnInit() {}
 
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit {
   }
 
   protected login() {
-    this.authService.login(this.loginRequest).subscribe({
+    this.submiting = true;
+    this.authService.login(this.loginRequest , this.recuerdame).subscribe({
       next: (data) => {},
       error: async (error) => {
         const alert = await this.alertController.create({
@@ -37,7 +39,9 @@ export class LoginComponent implements OnInit {
 
         await alert.present();
       },
-      complete: () => {},
+      complete: () => {
+        this.submiting = false;
+      },
     });
   }
 
