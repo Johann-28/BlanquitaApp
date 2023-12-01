@@ -47,7 +47,14 @@
             errorText="La Contraseña es requerida"
           ></ion-input>
 
-          <ion-checkbox labelPlacement="end">Recuerdame</ion-checkbox>
+          <ion-checkbox
+            id="recuerdame"
+            name="recuerdame"
+            labelPlacement="end"
+            [(ngModel)]="recuerdame"
+            name="recuerdame"
+            >Recuerdame</ion-checkbox
+          >
 
           <div class="button-contenedor">
             <ion-button type="submit" class="btn btn-primary"

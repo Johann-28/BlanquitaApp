@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   protected loginRequest: LoginRequestDto = { correo: '', password: '' };
   protected modalAbierto: boolean = false;
   protected mensajeModal: string = '';
+  protected recuerdame : boolean = false;
 
   ngOnInit() {}
 
@@ -25,7 +26,6 @@ export class LoginComponent implements OnInit {
   }
 
   protected login() {
-    console.log(this.loginRequest);
     this.authService.login(this.loginRequest).subscribe({
       next: (data) => {},
       error: async (error) => {
