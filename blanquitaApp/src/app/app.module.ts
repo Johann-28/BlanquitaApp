@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
@@ -13,13 +13,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './https/auth.service';
 import { HeaderModule } from './header/header.module';
 import { MatSelectModule } from '@angular/material/select';
+import { TitleService } from './https/title.service';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule , HttpClientModule, MatTableModule, BrowserAnimationsModule, HeaderModule,MatSelectModule],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule , HttpClientModule, MatTableModule, BrowserAnimationsModule, HeaderModule,MatSelectModule, HeaderModule],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
-  AuthService],
+ ],
+  
   bootstrap: [AppComponent],
 })
 export class AppModule {}
