@@ -12,10 +12,11 @@ import { BaseUrlInterceptor } from './auth/interceptor';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AuthService } from './https/auth.service';
 import { HeaderModule } from './header/header.module';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule , HttpClientModule, MatTableModule, BrowserAnimationsModule, HeaderModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule , HttpClientModule, MatTableModule, BrowserAnimationsModule, HeaderModule,MatSelectModule],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     { provide: HTTP_INTERCEPTORS, useClass: BaseUrlInterceptor, multi: true },
   AuthService],

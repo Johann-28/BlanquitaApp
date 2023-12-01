@@ -8,6 +8,7 @@ import { ExploreContainerComponentModule } from '../explore-container/explore-co
 import { Tab2PageRoutingModule } from './tab2-routing.module';
 import { MatIconModule } from '@angular/material/icon';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -18,7 +19,8 @@ import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
     ExploreContainerComponentModule,
     Tab2PageRoutingModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule
   ],
   declarations: [Tab2Page, EditDialogComponent]
 })
