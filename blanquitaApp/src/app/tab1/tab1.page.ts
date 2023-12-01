@@ -3,6 +3,7 @@ import { TipoProductoService } from '../https/tipo-producto.service';
 import { ProductTypeDTO } from '../DTOs/products.dto';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
+import { AlertService } from '../https/alert.service';
 
 @Component({
   selector: 'app-tab1',
@@ -21,7 +22,8 @@ export class Tab1Page implements OnInit {
   constructor(
     private dialog: MatDialog,
     private tipoProductoService: TipoProductoService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private AlertService:AlertService
   ) {
     
   }
@@ -72,6 +74,7 @@ export class Tab1Page implements OnInit {
           this.clave = '';
           this.descripcion = '';
         });
+        this.AlertService.mostrarModal('Exito','Se agrego correctamente el tipo de producto al sistema')
     });
 
   }
