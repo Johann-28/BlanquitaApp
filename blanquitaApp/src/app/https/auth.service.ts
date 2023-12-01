@@ -24,6 +24,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('jwt');
+    this.router.navigate(['login']);
   }
 
   isLoggedIn() {
