@@ -58,7 +58,7 @@
 
           <div class="button-contenedor">
             <ion-button type="submit" class="btn btn-primary"
-            [disabled]="submiting"
+            [disabled]="submiting || !formulario.valid"
               >Ingresar</ion-button
             >
           </div>
