@@ -4,6 +4,7 @@ import { CorteCajaListadoDTO } from '../dtos/corte-caja-listado-dto';
 import { ObtenerListadoFormDTO } from '../dtos/obtener-listado-form-dto';
 import { CorteCajaFormDTO } from '../dtos/corte-caja-form-dto';
 import { Form } from '@angular/forms';
+import { SessionService } from '../https/session.service';
 
 @Component({
   selector: 'app-corte-caja',
@@ -41,7 +42,7 @@ export class CorteCajaPage {
     saldoInicial :0
   };
 
-  constructor(private corteCajaService:CorteCajaService) { }
+  constructor(private corteCajaService:CorteCajaService , private sessionService : SessionService) { }
 
   /*ngOnInit() {
     this.obtenerListadoDeOrdenes()
@@ -91,9 +92,8 @@ export class CorteCajaPage {
     let anio = new Date().getFullYear()
     this.corteCaja.fecha = new Date(`${anio}-${mes}-${dia}`)
     this.corteCajaService.postCorteCaja(this.corteCaja).subscribe(res => {
-      console.log(res);
-      
-      this.corteCaja.idUsuario = 1;
+     
+      this.corteCaja.idUsuario = this.getIdUsuario();
       this.corteCaja.fecha = new Date();
       this.corteCaja.comentarios = '';
       this.corteCajaService.ObtenerListadoSuma(this.consulta).subscribe(res => {
@@ -101,6 +101,17 @@ export class CorteCajaPage {
       })
       this.corteCaja.saldoFinal = 0;
     })
+  }
+
+  getIdUsuario(){
+    const idUsuario = this.sessionService.obtenerIdUsuarioSesion();
+    if(idUsuario){
+      return idUsuario;
+    }
+    else {
+      return 0;
+    }
+
   }
 
 }
