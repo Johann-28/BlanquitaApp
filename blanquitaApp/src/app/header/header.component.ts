@@ -3,13 +3,15 @@ import { AuthService } from '../https/auth.service';
 import { SessionService } from '../https/session.service';
 import { Observable } from 'rxjs';
 import { TitleService } from '../https/title.service';
+import { PopoverController } from '@ionic/angular';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit
+ {
   protected title: string;
 
   protected nombreUsuario: string = '';
@@ -17,7 +19,8 @@ export class HeaderComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private sessionService: SessionService,
-    private titleService: TitleService
+    private titleService: TitleService,
+    private popoverController : PopoverController
   ) {}
   ngOnInit() {
     this.getNombreUsuario();
@@ -26,8 +29,9 @@ export class HeaderComponent implements OnInit {
     });
   }
 
-  protected logout() {
+  protected async logout() {
     this.authService.logout();
+    await this.popoverController.dismiss();
   }
 
   protected getNombreUsuario() {

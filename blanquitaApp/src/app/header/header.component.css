@@ -1,4 +1,30 @@
-ion-button
-{
-    --background: none; 
+ion-button {
+  --background: none;
+  --box-shadow: none;
+}
+
+ion-button ion-label {
+  color: white;
+  font-family: "Poppins", sans-serif;
+  margin: auto 1vw;
+}
+
+ion-avatar {
+  height: 4vh;
+  width: 4vh;
+}
+
+ion-title{
+  font-size: 2em;
+}
+
+ion-header{
+  height: 10vh;
+}
+
+ion-toolbar{
+ height: 100%;
+ 
+ align-items: center;
+ display: flex;
 }

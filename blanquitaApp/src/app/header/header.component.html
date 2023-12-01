@@ -2,12 +2,14 @@
   <ion-toolbar>
     <ion-title>{{ title }}</ion-title>
 
-    <ion-button id="click-trigger"
-      ><ion-avatar>
+    <ion-button id="click-trigger" slot="end">
+      <ion-label>{{ nombreUsuario }}</ion-label>
+      <ion-avatar>
         <img
           alt="Silhouette of a person's head"
           src="https://ionicframework.com/docs/img/demos/avatar.svg"
-        /> </ion-avatar
+        /> 
+        </ion-avatar
     ></ion-button>
     <ion-popover trigger="click-trigger">
       <div class="wrapper">
@@ -22,6 +24,6 @@
       </div>
     </ion-popover>
 
-    <ion-label>{{ nombreUsuario }}</ion-label>
+  
   </ion-toolbar>
 </ion-header>
