@@ -51,9 +51,12 @@ isNotEmpty(): boolean {
 
 onSubmitDelete(){
   this.tipoProductoService.deleteProductType(this.id).subscribe(res => {
+    this.AlertService.mostrarModal('Exito', 'Se elimino exitosamente del sistema')
+}, err => {
+  this.AlertService.mostrarModal('Error', 'No se puede eliminar el tipo producto, ya que tiene productos relacionados a el, elimine o modifique estos productos')
 })
 this.dialogRef.close();
-this.AlertService.mostrarModal('Exito', 'Se elimino exitosamente del sistema')
+
 
 }
 

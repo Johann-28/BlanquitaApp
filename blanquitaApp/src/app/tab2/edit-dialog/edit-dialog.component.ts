@@ -60,9 +60,13 @@ isNotEmpty(): boolean {
 
 onSubmitDelete(){
   this.productoService.deleteProduct(this.id).subscribe(res => {
+    this.dialogRef.close();
+    this.AlertService.mostrarModal('Exito','Se elimino exitosamente el producto en el sistema')
+},(err) =>{
+  this.dialogRef.close();
+  this.AlertService.mostrarModal('Error','No se puede eliminar el producto ya que este contiene combo en el, elimine primero los combos relacionados al producto')
 })
-this.dialogRef.close();
-this.AlertService.mostrarModal('Exito','Se elimino exitosamente el producto en el sistema')
+
 
 }
 
