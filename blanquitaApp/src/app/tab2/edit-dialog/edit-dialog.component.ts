@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ProductDTO, ProductTypeDTO } from 'src/app/DTOs/products.dto';
 import { ProductoService } from 'src/app/https/productos.service';
 import { TipoProductoService } from 'src/app/https/tipo-producto.service';
+import { AlertService } from '../../https/alert.service';
 
 
 @Component({
@@ -27,7 +28,8 @@ productTypes: ProductTypeDTO[] = [];
     private dialogRef: MatDialogRef<EditDialogComponent>,
     private productoService: ProductoService,
     private tipoProductoService: TipoProductoService,
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private AlertService:AlertService
   ) {
       this.id = data.product.idProducto
       this.idTipoProducto = data.product.idTipoProducto;
@@ -49,6 +51,7 @@ productTypes: ProductTypeDTO[] = [];
     this.productoService.putProduct(this.id, this.product).subscribe(res => {
   })
   this.closeDialog();
+  this.AlertService.mostrarModal('Exito','Se modifico exitosamente el producto')
 }
 
 isNotEmpty(): boolean {
@@ -59,6 +62,7 @@ onSubmitDelete(){
   this.productoService.deleteProduct(this.id).subscribe(res => {
 })
 this.dialogRef.close();
+this.AlertService.mostrarModal('Exito','Se elimino exitosamente el producto en el sistema')
 
 }
 

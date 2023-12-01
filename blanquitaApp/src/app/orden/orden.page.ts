@@ -8,6 +8,7 @@ import { ComboDTO } from '../dtos/combo-dto';
 import { OrdenService } from '../https/orden.service';
 import { SessionService } from '../https/session.service';
 import { TitleService } from '../https/title.service';
+import { AlertService } from '../https/alert.service';
 
 @Component({
   selector: 'app-orden',
@@ -29,7 +30,8 @@ export class OrdenPage implements OnInit {
               private comboService:ComboService,
               private ordenService:OrdenService,
               private sessionService : SessionService,
-              private titleService : TitleService) { }
+              private titleService : TitleService,
+              private AlertService:AlertService) { }
 
   ngOnInit() {
     this.getProductos()
@@ -170,6 +172,7 @@ export class OrdenPage implements OnInit {
     this.ordenService.postCombo(this.orden).subscribe(res => {
       this.detalleOrden = []
       this.obtenerTotalOrden()
+      this.AlertService.mostrarModal('Exito','Orden registrada exitosamente')
     })
   }
 

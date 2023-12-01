@@ -5,6 +5,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { EditDialogComponent } from './edit-dialog/edit-dialog.component';
 import { ProductoService } from '../https/productos.service';
 import { TitleService } from '../https/title.service';
+import { AlertService } from '../https/alert.service';
 
 @Component({
   selector: 'app-tab2',
@@ -28,7 +29,8 @@ export class Tab2Page implements OnInit {
     private dialog: MatDialog,
     private productoService: ProductoService,
     private tipoProductoService: TipoProductoService,
-    private titleService : TitleService
+    private titleService : TitleService,
+    private AlertService:AlertService
   ) {
     
   }
@@ -81,6 +83,8 @@ export class Tab2Page implements OnInit {
           this.idTipoProducto = 0;
           this.precio = 0;
           this.descripcion = '';
+
+          this.AlertService.mostrarModal('Exito','Se agrego exitosamente el producto al sistema')
         });
     });
 
