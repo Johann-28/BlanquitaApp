@@ -1,14 +1,68 @@
-<p>
-  login works!
-</p>
+<ion-content>
+  <div class="contenedor">
+    <div class="mitad-izquierda">
+      <div class="formulario">
+        <div class="header">
+          <ion-icon
+            aria-hidden="true"
+            name="diamond-outline"
+            slot="start"
+          ></ion-icon>
+          <h1>Blanquita</h1>
+        </div>
+        <p>Tacos y cuentas claras</p>
 
-<input type="text" class="form-control" id="correo" placeholder="Correo" [(ngModel)]="loginRequest.correo">
-<input type="password" class="form-control" id="password" placeholder="Contraseña" [(ngModel)]="loginRequest.password">
+        <form #formulario="ngForm" (ngSubmit)="login()">
+          <ion-input
+            color="dark"
+            #correo="ngModel"
+            [(ngModel)]="loginRequest.correo"
+            id="correo"
+            name="correo"
+            type="text"
+            placeholder="Usuario"
+            label="Usuario"
+            label-placement="floating"
+            fill="outline"
+            maxlength="50"
+            required="true"
+            autocomplete="off"
+            errorText="El usuario es requerido"
+          ></ion-input>
 
-<button type="button" class="btn btn-primary" (click)="login()">Ingresar</button>
+          <ion-input
+            color="dark"
+            #password="ngModel"
+            [(ngModel)]="loginRequest.password"
+            id="password"
+            name="password"
+            type="password"
+            placeholder="Contraseña"
+            label="Contraseña"
+            label-placement="floating"
+            fill="outline"
+            maxlength="50"
+            required="true"
+            autocomplete="off"
+            errorText="La Contraseña es requerida"
+          ></ion-input>
 
-<button type="button" class="btn btn-primary" (click)="logout()">Logout</button>
+          <ion-checkbox labelPlacement="end">Recuerdame</ion-checkbox>
 
+          <div class="button-contenedor">
+            <ion-button type="submit" class="btn btn-primary"
+              >Ingresar</ion-button
+            >
+          </div>
+        </form>
+      </div>
+    </div>
 
-
-
+    <div class="imagen">
+      <ion-img
+        src="../../assets/img/TacosBlanquita.jpg"
+        alt="The Wisconsin State Capitol building in Madison, WI at night"
+      ></ion-img>
+    </div>
+  </div>
+</ion-content>

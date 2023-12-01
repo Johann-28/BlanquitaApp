@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   }
 
   protected login() {
+    console.log(this.loginRequest);
     this.authService.login(this.loginRequest).subscribe({
       next: (data) => {},
       error: async (error) => {

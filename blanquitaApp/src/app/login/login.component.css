@@ -1,0 +1,67 @@
+
+ion-img {
+  height: 100vh;
+  width: 50vw;
+}
+
+.contenedor {
+  display: flex;
+}
+
+.formulario {
+  width: 80%;
+  margin: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: stretch;
+}
+
+h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 4vw;
+}
+
+.mitad-izquierda {
+  width: 50%;
+  background-color: #272727;
+  align-items: center;
+  justify-content: center;
+}
+
+.imagen {
+  background-color: #cbddd1;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  display: flex;
+}
+
+ion-img {
+  width: 80%;
+  height: 90%;
+  margin: auto;
+}
+
+ion-input {
+  margin: 3vh auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+ion-icon {
+  font-size: 4vw;
+}
+
+ion-button {
+  --background: #1f5014;
+}
+.button-contenedor {
+  display: flex;
+  justify-content: center;
+}
