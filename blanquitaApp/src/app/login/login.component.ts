@@ -38,6 +38,7 @@ export class LoginComponent implements OnInit {
         });
 
         await alert.present();
+        this.submiting = false;
       },
       complete: () => {
         this.submiting = false;
