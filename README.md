@@ -1,1 +1,3 @@
-![Texto alternativo](./blanquita-app/blanquitaAPP/src/assets/DER.jpg)
+![Texto alternativo](blanquitaApp\src\assets\img\DER.jpg)
+
+ 
