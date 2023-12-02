@@ -21,7 +21,7 @@ export class AuthService {
           }else{
             sessionStorage.setItem('jwt', response.token);
           }
-          this.router.navigate(['tabs']);
+          this.router.navigate(['tabs/orden']);
         } )
       );
   }
