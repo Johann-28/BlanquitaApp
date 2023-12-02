@@ -31,6 +31,7 @@ export class SessionService {
     const esAdmin =
       this.obtenerClaveRolUsuarioSesion() ===
       GeneralConstant.CLAVE_USUARIO_ADMINISTRADOR;
+      console.log(this.obtenerClaveRolUsuarioSesion());
     return esAdmin;
   }
 
